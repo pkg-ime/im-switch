@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (C) 2005 Kenshi Muto <kmuto@debian.org>
+# Copyright (C) 2005 Kenshi Muto <kmuto@debian.org> 
 #  Modified for Debian package.
 # Copyright (C) 1999 - 2004 Red Hat, Inc. All rights reserved. This
 # copyrighted material is made available to anyone wishing to use, modify,
@@ -29,6 +29,7 @@ done
 unset lang_region
 
 [ -n "$GTK_IM_MODULE" ] && export GTK_IM_MODULE
+[ -n "$QT_IM_MODULE" ] && export QT_IM_MODULE
 
 # setup XMODIFIERS
 [ -z "$XMODIFIERS" -a -n "$XIM" ] && XMODIFIERS="@im=$XIM"

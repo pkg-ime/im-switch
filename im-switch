@@ -8,6 +8,7 @@ DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link
 DEPENDENCY=/usr/lib/im-switch/dependscheck.pl
 HOOKDIR=/usr/lib/im-switch
 USERID=$(id -u)
+VER=0.3+debian1
 
 auto() {
     if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
@@ -18,14 +19,14 @@ auto() {
 	    /usr/sbin/update-alternatives --auto xinput-$LNG
 	    PREVIOUS=$DEFAULT
 	    DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link currently points to \(.*\)/\1/p')
-	    if [ "$DEFAULT" -ne "$PREVIOUS" ]; then
-               [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
-               [ -x "$HOOKDIR/$DEFAULT" ] &&  $HOOKDIR/$DEFAULT install
+	    if [ "$DEFAULT" != "$PREVIOUS" ]; then
+               [ "$PREVIOUS" -a -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+               [ "$DEFAULT" -a -x "$HOOKDIR/$DEFAULT" ] &&  $HOOKDIR/$DEFAULT install
             fi
 	else
 	   if [ -r "${XINPUT_PATH}/${LNG}" -a -r "${DOTXINPUT_PATH}/${LNG}" ]; then
-	     $PREVIOUS=$(readlink ${DOTXINPUT_PATH}/${LNG} | sed -e "s%$XINPUT_PATH/%%")
-             [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+	     PREVIOUS=$(readlink ${DOTXINPUT_PATH}/${LNG} | sed -e "s%$XINPUT_PATH/%%")
+             [ "$PREVIOUS" -a -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
 	     mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
 	   fi
 	fi
@@ -68,9 +69,9 @@ setalt() {
 	    /usr/sbin/update-alternatives --set xinput-$LNG $XINPUT_PATH/$1
 	    PREVIOUS=$DEFAULT
 	    DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link currently points to \(.*\)/\1/p')
-	    if [ "$DEFAULT" -ne "$PREVIOUS" ]; then
-               [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
-               [ -x "$HOOKDIR/$DEFAULT" ] &&  $HOOKDIR/$DEFAULT install
+	    if [ "$DEFAULT" != "$PREVIOUS" ]; then
+               [ "$PREVIOUS" -a -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+               [ "$DEFAULT" -a -x "$HOOKDIR/$DEFAULT" ] &&  $HOOKDIR/$DEFAULT install
             fi
             dependency $1
 	fi
@@ -78,21 +79,21 @@ setalt() {
 	[ -r "$XINPUT_PATH/$1" ] || { echo "No xinput.d config for $1 available." ; exit 1 ; }
 	if [ -d ${DOTXINPUT_PATH} ]; then
 	    if [ -r "${DOTXINPUT_PATH}/${LNG}" ]; then
+	      PREVIOUS=$(readlink ${DOTXINPUT_PATH}/${LNG} | sed -e "s%$XINPUT_PATH/%%")
               mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
-	      $PREVIOUS=$(readlink ${DOTXINPUT_PATH}/${LNG} | sed -e "s%$XINPUT_PATH/%%")
-              [ "$1" -ne "$PREVIOUS" ] && [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+              [ "$PREVIOUS" ] && [ "$1" != "$PREVIOUS" ] && [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
             fi
 	else
 	    mkdir -p ${DOTXINPUT_PATH}
 	fi
 	ln -s $XINPUT_PATH/$1 ${DOTXINPUT_PATH}/$LNG
-        [ -x "$HOOKDIR/$1" ] &&  $HOOKDIR/$1 install
+        [ "$1" -a -x "$HOOKDIR/$1" ] &&  $HOOKDIR/$1 install
         dependency $1
     fi
 }
 
 help() {
-echo "Input Method Switcher 0.3"
+echo "Input Method Switcher $VER"
 echo ""
 echo "Usage: $0 [-z lang] -s inputmethodname"
 echo "           to set a specific input method for the language"

@@ -1,4 +1,18 @@
-im-switch (0.6) UNRELEASED; urgency=low
+im-switch (0.8) UNRELEASED; urgency=low
+
+  * Support QT_IM_MODULE.
+    (Although current Debian Qt package doesn't support this feature.)
+  * Add Debian specific version number to im-switch script.
+
+ -- Kenshi Muto <kmuto@debian.org>  Wed, 23 Feb 2005 22:03:38 +0900
+
+im-switch (0.7) unstable-mtu; urgency=low
+
+  * Fix script typo.
+
+ -- Kenshi Muto <kmuto@debian.org>  Tue, 15 Feb 2005 20:25:14 +0900
+
+im-switch (0.6) unstable-mtu; urgency=low
 
   * Add hook routine.
     You can locate your own IM hook on /usr/lib/im-switch.
