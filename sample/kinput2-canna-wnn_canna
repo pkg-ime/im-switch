@@ -1,0 +1,5 @@
+XIM=kinput2
+XIM_PROGRAM=kinput2-canna-wnn
+XIM_ARGS="-canna"
+GTK_IM_MODULE=xim
+DEPENDS=canna

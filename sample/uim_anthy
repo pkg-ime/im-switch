@@ -1,0 +1,23 @@
+XIM=uim
+XIM_PROGRAM=uim-xim
+XIM_ARGS=""
+GTK_IM_MODULE=uim
+DEPENDS=anthy
+ENGINE=anthy
+
+if [ -r "$HOME/.uim" ]; then
+  TMPFILE=$(mktemp) || exit 1
+  if [ "$(grep "; IM-SWITCH VALUE" $HOME/.uim)" ]; then
+    sed "s/(define default-im-name '[^)]*) ; IM-SWITCH VALUE/(define default-im-name '$ENGINE) ; IM-SWITCH VALUE/" < $HOME/.uim > $TMPFILE
+  else
+    cat $HOME/.uim > $TMPFILE
+    if [ "$(grep -E "^\(define[[:space:]]+default-im-name[[:space:]]" $HOME/.uim)" ]; then
+      echo "; (define default-im-name '$ENGINE) ; IM-SWITCH VALUE" >> $TMPFILE
+    else
+      echo "(define default-im-name '$ENGINE) ; IM-SWITCH VALUE" >> $TMPFILE
+    fi
+  fi
+  mv $TMPFILE $HOME/.uim
+else
+  echo "(define default-im-name '$ENGINE) ; IM-SWITCH VALUE" > $HOME/.uim
+fi

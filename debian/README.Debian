@@ -1,0 +1,26 @@
+im-switch for Debian
+--------------------
+
+- To check input method list:
+   # im-switch -l 
+- To change default SYSTEM input method:
+   # im-switch -s <inputmethod>
+   (inputmethod is such as uim_skk)
+   This changes /etc/alternatives/xinput-<LANG name>
+- To change default USER input method:
+   $ im-switch -s <inputmethod>
+   This changes ~/.xinput/xinput-<LANG name>
+
+Each input method needs
+-----------------------
+Each input method deb should provide alternative such as:
+
+[postinst]
+update-alternatives \
+        --install /etc/X11/xinit/xinput.d/ja_JP xinput-ja_JP \
+        /etc/X11/xinit/xinput.d/uim_skk 50
+
+[prerm]
+update-alternatives --remove xinput-ja_JP /etc/X11/xinit/xinput.d/uim_skk
+
+ -- Kenshi Muto <kmuto@debian.org>, Sun, 13 Feb 2005 21:12:00 +0900

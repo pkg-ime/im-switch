@@ -1,0 +1,109 @@
+#!/bin/sh
+
+XINPUT_PATH=/etc/X11/xinit/xinput.d
+DOTXINPUT_PATH=${HOME}/.xinput.d
+ALTER_XINPUT=/etc/alternatives/xinput-
+LNG=`echo ${LC_CTYPE:-$LANG} | awk -F. '{ print $1 }'`
+DEFAULT=`/usr/sbin/update-alternatives --display xinput-$LNG | awk '{ if ($0 ~/link/) print $5 }'`
+
+auto() {
+    if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
+	echo "No alternatives defined for language $LNG"
+	exit 1
+    else
+	if [ "$UID" -eq 0 ]; then
+	    /usr/sbin/update-alternatives --auto xinput-$LNG
+	else
+	   [ -r "${XINPUT_PATH}/${LNG}" -a -r "${DOTXINPUT_PATH}/${LNG}" ] && mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
+	fi
+    fi
+}
+
+list() {
+    if [ -r "${DOTXINPUT_PATH}/${LNG}" ]; then
+	echo "You have ${LNG} setup in \"${DOTXINPUT_PATH}\"."
+	echo "======================================================="
+    fi
+    if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
+	echo "No alternatives defined for language $LNG"
+    else
+	/usr/sbin/update-alternatives --display xinput-$LNG | sed -e "s%$XINPUT_PATH/%%"
+    fi
+    echo "======================================================="
+    echo "The following languages currently have input methods configured:"
+    for i in `ls $ALTER_XINPUT* | sed -e "s%$ALTER_XINPUT%%"`; do
+        echo -n "$i "
+    done
+    echo
+}
+
+setalt() {
+    if [ "$UID" -eq 0 ]; then
+	if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
+	    echo "No alternatives defined for language $LNG"
+	else
+	    /usr/sbin/update-alternatives --set xinput-$LNG $XINPUT_PATH/$1
+	fi
+    else
+	[ -r "$XINPUT_PATH/$1" ] || { echo "No xinput.d config for $1 available." ; exit 1 ; }
+	if [ -d ${DOTXINPUT_PATH} ]; then
+	    [ -r "${DOTXINPUT_PATH}/${LNG}" ] && mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
+	else
+	    mkdir -p ${DOTXINPUT_PATH}
+	fi
+	ln -s $XINPUT_PATH/$1 ${DOTXINPUT_PATH}/$LNG
+    fi
+}
+
+help() {
+echo "Input Method Switcher 0.3"
+echo ""
+echo "Usage: $0 [-z lang] -s inputmethodname"
+echo "           to set a specific input method for the language"
+echo "       $0 [-z lang] -a"
+echo "           to revent to the default input method for the language"
+echo "       $0 [-z lang] -l"
+echo "           to list current settings and available input methods for"
+echo "           the language, and also all the available languages"
+echo "       $0 -h"
+echo "           to show this help"
+echo
+echo "The \"LANG\" argument of -z takes the form \"ll_CC\" and is used to override"
+echo "the current language with ll_CC instead: eg \"-z ja_JP\""
+    exit 65
+}
+
+setcommand() {
+if [ -z "$COMMAND" ]; then
+    COMMAND=$1
+else
+    echo "Use only of -s, -a or -l."
+    echo "Try \"$0 -h\" for usage."
+    exit 1
+fi
+}
+
+if [ $# -eq 0 ]; then
+    help
+    exit 1
+fi
+
+bad_option=0
+
+while getopts "hz:als:" OPTION; do
+    case $OPTION in
+        z) LNG=$OPTARG;;
+        a) setcommand auto;;
+        l) setcommand list;;
+        s) setcommand "setalt $OPTARG";;
+        h) setcommand "help $0";;
+	?) bad_option=1
+    esac
+done
+
+if [ "$bad_option" -eq 1 ]; then
+    echo "Try \"$0 -h\" for usage."
+    exit 1
+else
+    $COMMAND
+fi

@@ -1,0 +1,20 @@
+Source: im-switch
+Section: x11
+Priority: optional
+Maintainer: Kenshi Muto <kmuto@debian.org>
+Build-Depends-Indep: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: im-switch
+Architecture: all
+Depends: xfree86-common
+Suggests: uim|kinput2-canna|kinput2-canna-wnn|skkinput
+Description: Input method switch framework
+ im-switch provides the framework to switch default of input method
+ on X Window System. Input method is usually needed by Japanese,
+ Chinese and Korean to input their native language characters.
+ .
+ By installing this package, input method, and conversion engine,
+ you can use input method (XIM and IMmodule) soon without any more
+ configuration. You can also choose your favorite input method by
+ 'im-switch' command.

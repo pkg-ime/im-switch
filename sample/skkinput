@@ -1,0 +1,5 @@
+XIM="skkinput"
+XIM_PROGRAM=skkinput
+XIM_ARGS=""
+GTK_IM_MODULE=xim
+DEPENDS="skkserv|dbskkd-cdb|skksearch|rskkserv"

@@ -1,0 +1,2 @@
+?package(im-switch):needs="text" section="Apps/Tools"\
+  title="im-switch" command="/usr/bin/im-switch"
