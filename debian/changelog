@@ -1,4 +1,4 @@
-im-switch (0.4) UNRELEASED; urgency=low
+im-switch (0.4) unstable-mtu; urgency=low
 
   * From now, im-switch is managed on Subversion.
     Commiters: Kenshi Muto, Akira TAGOH, and Masanori GOTO.
