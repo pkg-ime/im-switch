@@ -42,8 +42,8 @@ dependency() {
     DEPENDS=$(grep "DEPENDS=" $XINPUT_PATH/$1 | sed 's/DEPENDS=//')
     [ "$DEPENDS" ] && RESULT=$($DEPENDENCY $DEPENDS)
     if [ "$RESULT" ]; then
-      echo "Maybe you should install following package(s) to make this input method correct work."
-      echo "    $RESULT"
+      echo "Maybe you should install following package(s) also."
+      echo "  $RESULT"
     fi
 }
 
