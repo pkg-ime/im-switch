@@ -3,8 +3,8 @@
 XINPUT_PATH=/etc/X11/xinit/xinput.d
 DOTXINPUT_PATH=${HOME}/.xinput.d
 ALTER_XINPUT=/etc/alternatives/xinput-
-LNG=`echo ${LC_CTYPE:-$LANG} | awk -F. '{ print $1 }'`
-DEFAULT=`/usr/sbin/update-alternatives --display xinput-$LNG | awk '{ if ($0 ~/link/) print $5 }'`
+LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}; LNG=${LNG%@*}; LNG=${LNG%.*};
+DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link currently points to \(.*\)/\1/p')
 DEPENDENCY=/usr/lib/im-switch/dependscheck.pl
 USERID=$(id -u)
 
