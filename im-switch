@@ -5,6 +5,7 @@ DOTXINPUT_PATH=${HOME}/.xinput.d
 ALTER_XINPUT=/etc/alternatives/xinput-
 LNG=`echo ${LC_CTYPE:-$LANG} | awk -F. '{ print $1 }'`
 DEFAULT=`/usr/sbin/update-alternatives --display xinput-$LNG | awk '{ if ($0 ~/link/) print $5 }'`
+DEPENDENCY=/usr/lib/im-switch/dependscheck.pl
 
 auto() {
     if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
@@ -37,12 +38,22 @@ list() {
     echo
 }
 
+dependency() {
+    DEPENDS=$(grep "DEPENDS=" $XINPUT_PATH/$1 | sed 's/DEPENDS=//')
+    [ "$DEPENDS" ] && RESULT=$($DEPENDENCY $DEPENDS)
+    if [ "$RESULT" ]; then
+      echo "Maybe you should install following package(s) to make this input method correct work."
+      echo "    $RESULT"
+    fi
+}
+
 setalt() {
     if [ "$UID" -eq 0 ]; then
 	if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
 	    echo "No alternatives defined for language $LNG"
 	else
 	    /usr/sbin/update-alternatives --set xinput-$LNG $XINPUT_PATH/$1
+            dependency $1
 	fi
     else
 	[ -r "$XINPUT_PATH/$1" ] || { echo "No xinput.d config for $1 available." ; exit 1 ; }
@@ -52,6 +63,7 @@ setalt() {
 	    mkdir -p ${DOTXINPUT_PATH}
 	fi
 	ln -s $XINPUT_PATH/$1 ${DOTXINPUT_PATH}/$LNG
+        dependency $1
     fi
 }
 
