@@ -1,16 +1,22 @@
-im-switch (0.3) unstable; urgency=low
+im-switch (0.4) UNRELEASED; urgency=low
+
+  * 
+
+ -- Kenshi Muto <kmuto@debian.org>  Mon, 14 Feb 2005 13:38:17 +0900
+
+im-switch (0.3) unstable-mtu; urgency=low
 
   * Fix alternative path.
 
  -- Kenshi Muto <kmuto@debian.org>  Mon, 14 Feb 2005 00:44:15 +0900
 
-im-switch (0.2) unstable; urgency=low
+im-switch (0.2) unstable-mtu; urgency=low
 
   * Add empty input method configuration file ('none').
 
  -- Kenshi Muto <kmuto@debian.org>  Mon, 14 Feb 2005 00:27:54 +0900
 
-im-switch (0.1-1) unstable; urgency=low
+im-switch (0.1-1) unstable-mtu; urgency=low
 
   * Initial Release.
 
