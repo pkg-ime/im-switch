@@ -1,5 +1,5 @@
 XIM=htt
-XIM_PROGRAM=httx
+XIM_PROGRAM=/usr/bin/httx
 XIM_ARGS="-if atokx2 -xim htt_xbe"
 GTK_IM_MODULE=iiim
 DEPENDS=atokx2

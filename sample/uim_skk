@@ -1,6 +1,6 @@
 XIM=uim
-XIM_PROGRAM=uim-xim
-XIM_ARGS=""
+XIM_PROGRAM=/usr/bin/uim-xim
+XIM_ARGS=
 GTK_IM_MODULE=uim
 DEPENDS=skkdic
 ENGINE=skk

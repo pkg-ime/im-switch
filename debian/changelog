@@ -1,6 +1,9 @@
 im-switch (0.4) UNRELEASED; urgency=low
 
-  * 
+  * From now, im-switch is managed on Subversion.
+    Commiters: Kenshi Muto, Akira TAGOH, and Masanori GOTO.
+  * Kenshi Muto
+    - Use full path for XIM_PROGRAM.
 
  -- Kenshi Muto <kmuto@debian.org>  Mon, 14 Feb 2005 13:38:17 +0900
 
