@@ -13,7 +13,7 @@
 # X Input method setup script
 
 # Load up the user and system locale settings
-tmplang=${LC_CTYPE:-${LANG}}
+tmplang=${LC_ALL:-${LC_CTYPE:-${LANG}}
 
 ## try to source ~/.xinput.d/ll_CC or /etc/X11/xinit/xinput.d/ll_CC to
 ## setup the input method for locale (CC is needed for Chinese for example)
@@ -35,4 +35,4 @@ unset lang_region
 [ -n "$XMODIFIERS" ] && export XMODIFIERS
 
 # execute XIM_PROGRAM
-[ -n "$XIM_PROGRAM" ] && which "$XIM_PROGRAM" > /dev/null 2>&1 && "$XIM_PROGRAM" $XIM_ARGS &
+[ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && "$XIM_PROGRAM" $XIM_ARGS &
