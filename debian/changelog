@@ -1,3 +1,13 @@
+im-switch (0.6) UNRELEASED; urgency=low
+
+  * Add hook routine.
+    You can locate your own IM hook on /usr/lib/im-switch.
+    Hook will be called with "install" (when it is chosen) or "remove"
+    (when it is changed from default)
+    im-switch just call hook. Such as uid check is the work of script.
+
+ -- Kenshi Muto <kmuto@debian.org>  Tue, 15 Feb 2005 16:57:41 +0900
+
 im-switch (0.5) unstable-mtu; urgency=low
 
   * Update sample files. 

@@ -6,6 +6,7 @@ ALTER_XINPUT=/etc/alternatives/xinput-
 LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}; LNG=${LNG%@*}; LNG=${LNG%.*};
 DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link currently points to \(.*\)/\1/p')
 DEPENDENCY=/usr/lib/im-switch/dependscheck.pl
+HOOKDIR=/usr/lib/im-switch
 USERID=$(id -u)
 
 auto() {
@@ -15,8 +16,18 @@ auto() {
     else
 	if [ "$USERID" -eq 0 ]; then
 	    /usr/sbin/update-alternatives --auto xinput-$LNG
+	    PREVIOUS=$DEFAULT
+	    DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link currently points to \(.*\)/\1/p')
+	    if [ "$DEFAULT" -ne "$PREVIOUS" ]; then
+               [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+               [ -x "$HOOKDIR/$DEFAULT" ] &&  $HOOKDIR/$DEFAULT install
+            fi
 	else
-	   [ -r "${XINPUT_PATH}/${LNG}" -a -r "${DOTXINPUT_PATH}/${LNG}" ] && mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
+	   if [ -r "${XINPUT_PATH}/${LNG}" -a -r "${DOTXINPUT_PATH}/${LNG}" ]; then
+	     $PREVIOUS=$(readlink ${DOTXINPUT_PATH}/${LNG} | sed -e "s%$XINPUT_PATH/%%")
+             [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+	     mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
+	   fi
 	fi
     fi
 }
@@ -55,16 +66,27 @@ setalt() {
 	    echo "No alternatives defined for language $LNG"
 	else
 	    /usr/sbin/update-alternatives --set xinput-$LNG $XINPUT_PATH/$1
+	    PREVIOUS=$DEFAULT
+	    DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link currently points to \(.*\)/\1/p')
+	    if [ "$DEFAULT" -ne "$PREVIOUS" ]; then
+               [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+               [ -x "$HOOKDIR/$DEFAULT" ] &&  $HOOKDIR/$DEFAULT install
+            fi
             dependency $1
 	fi
     else
 	[ -r "$XINPUT_PATH/$1" ] || { echo "No xinput.d config for $1 available." ; exit 1 ; }
 	if [ -d ${DOTXINPUT_PATH} ]; then
-	    [ -r "${DOTXINPUT_PATH}/${LNG}" ] && mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
+	    if [ -r "${DOTXINPUT_PATH}/${LNG}" ]; then
+              mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
+	      $PREVIOUS=$(readlink ${DOTXINPUT_PATH}/${LNG} | sed -e "s%$XINPUT_PATH/%%")
+              [ "$1" -ne "$PREVIOUS" ] && [ -x "$HOOKDIR/$PREVIOUS" ] &&  $HOOKDIR/$PREVIOUS remove
+            fi
 	else
 	    mkdir -p ${DOTXINPUT_PATH}
 	fi
 	ln -s $XINPUT_PATH/$1 ${DOTXINPUT_PATH}/$LNG
+        [ -x "$HOOKDIR/$1" ] &&  $HOOKDIR/$1 install
         dependency $1
     fi
 }
