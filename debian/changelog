@@ -1,3 +1,9 @@
+im-switch (0.5) unstable-mtu; urgency=low
+
+  * Update sample files. 
+
+ -- Kenshi Muto <kmuto@debian.org>  Mon, 14 Feb 2005 23:37:43 +0900
+
 im-switch (0.4) unstable-mtu; urgency=low
 
   * From now, im-switch is managed on Subversion.

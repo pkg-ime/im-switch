@@ -1,5 +1,5 @@
 XIM=skkinput
-XIM_PROGRAM=/usr/X11R6/bin/skkinput
+XIM_PROGRAM=skkinput
 XIM_ARGS=
 GTK_IM_MODULE=
 DEPENDS="skkserv|dbskkd-cdb|skksearch|rskkserv"
