@@ -59,7 +59,7 @@ install: build
 	install -o root -g root -m 755 im-switch $(CURDIR)/debian/im-switch/usr/bin/
 	install -o root -g root -m 644 xinput.sh $(CURDIR)/debian/im-switch/etc/X11/Xsession.d/90im-switch
 	install -o root -g root -m 644 sample/none $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d
-	install -o root -g root -m 755 dependscheck.pl $(CURDIR)/debian/im-switch/usr/lib/im-switch
+	install -o root -g root -m 755 dependscheck.pl $(CURDIR)/debian/im-switch/usr/share/im-switch
 
 # Build architecture-independent files here.
 binary-indep: build install

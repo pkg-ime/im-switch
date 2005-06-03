@@ -1,4 +1,4 @@
 usr/bin
 etc/X11/xinit/xinput.d
 etc/X11/Xsession.d
-usr/lib/im-switch
+usr/share/im-switch

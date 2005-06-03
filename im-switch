@@ -15,8 +15,8 @@ DOTXINPUT_PATH=${HOME}/.xinput.d
 ALTER_XINPUT=/etc/alternatives/xinput-
 LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}; LNG=${LNG%@*}; LNG=${LNG%.*};
 DEFAULT=$(/usr/sbin/update-alternatives --display xinput-$LNG | sed -ne 's/ link currently points to \(.*\)/\1/p')
-DEPENDENCY=/usr/lib/im-switch/dependscheck.pl
-HOOKDIR=/usr/lib/im-switch
+DEPENDENCY=/usr/share/im-switch/dependscheck.pl
+HOOKDIR=/usr/share/im-switch
 USERID=$(id -u)
 VER=0.3+debian1
 
