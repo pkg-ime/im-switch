@@ -1,3 +1,10 @@
+im-switch (1.0) unstable; urgency=low
+
+  * Bump up to 1.0, Initial release for Debian.
+    (closes: #311859)
+
+ -- Kenshi Muto <kmuto@debian.org>  Sun,  5 Jun 2005 23:07:32 +0900
+
 im-switch (0.8) unstable-mtu; urgency=low
 
   * Support QT_IM_MODULE.
