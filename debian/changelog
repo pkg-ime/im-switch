@@ -1,3 +1,10 @@
+im-switch (1.1) unstable; urgency=low
+
+  * Downgrade xfree86-common dependency to Recommends, because
+    uim may run without X.
+
+ -- Kenshi Muto <kmuto@debian.org>  Thu, 16 Jun 2005 20:59:09 +0900
+
 im-switch (1.0) unstable; urgency=low
 
   * Bump up to 1.0, Initial release for Debian.
