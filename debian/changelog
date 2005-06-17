@@ -1,3 +1,9 @@
+im-switch (1.2) UNRELEASED; urgency=low
+
+  * Needs -xim instead of +xim for kinput2. Thanks Maehara-san.
+
+ -- Kenshi Muto <kmuto@debian.org>  Fri, 17 Jun 2005 11:58:42 +0900
+
 im-switch (1.1) unstable; urgency=low
 
   * Downgrade xfree86-common dependency to Recommends, because

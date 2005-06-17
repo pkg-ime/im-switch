@@ -1,5 +1,5 @@
 XIM=kinput2
 XIM_PROGRAM=/usr/X11R6/bin/kinput2-canna-wnn
-XIM_ARGS="-canna +xim"
+XIM_ARGS="-canna -xim"
 GTK_IM_MODULE=
 DEPENDS=canna
