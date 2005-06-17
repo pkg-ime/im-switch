@@ -11,7 +11,13 @@
 #
 
 exit(0) if (@ARGV < 1);
-use AptPkg::Cache;
+BEGIN {
+  eval "use AptPkg::Cache";
+  if ($@) {
+    print STDERR "Warning: dependency check won't work because libapt-pkg-perl isn't installed.\n";
+    exit(0);
+  }
+}
 my($cache) = AptPkg::Cache->new;
 
 sub isInstalled {
