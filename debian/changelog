@@ -1,7 +1,8 @@
-im-switch (1.2) unstable; urgency=low
+im-switch (1.2) UNRELEASED; urgency=low
 
   * Modify dependscheck.pl to check libapt-pkg-perl before running.
   * Needs -xim instead of +xim for kinput2. Thanks Maehara-san.
+  * Allow x-common instead of xfree86-common.
 
  -- Kenshi Muto <kmuto@debian.org>  Fri, 17 Jun 2005 11:58:42 +0900
 
