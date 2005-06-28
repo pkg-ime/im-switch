@@ -7,8 +7,7 @@ Standards-Version: 3.6.1
 
 Package: im-switch
 Architecture: all
-Depends: libapt-pkg-perl
-Recommends: x-common | xfree86-common
+Recommends: x-common | xfree86-common, libapt-pkg-perl
 Description: Input method switch framework
  im-switch provides the framework to switch default of input method
  on X Window System. Input method is usually needed by Japanese,
