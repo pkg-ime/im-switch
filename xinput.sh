@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Copyright (C) 2005 Kenshi Muto <kmuto@debian.org> 
 #  Modified for Debian package.
 # Copyright (C) 1999 - 2004 Red Hat, Inc. All rights reserved. This
@@ -24,7 +24,7 @@ for f in $HOME/.xinput.d/${lang_region} \
 	    $HOME/.xinput.d/default \
 	    /etc/X11/xinit/xinput.d/${lang_region} \
 	    /etc/X11/xinit/xinput.d/default ; do
-    [ -r $f ] && source $f && break
+    [ -r $f ] && . $f && break
 done
 unset lang_region
 
