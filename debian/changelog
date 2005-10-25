@@ -1,6 +1,8 @@
 im-switch (1.3) UNRELEASED; urgency=low
 
   * Fix minor typo in help message. 
+  * Modify /etc/X11/90im-switch to respect user's environment values
+    around input methods. (closes: #335453, #328222)
 
  -- Kenshi Muto <kmuto@debian.org>  Wed, 13 Jul 2005 03:09:30 +0900
 

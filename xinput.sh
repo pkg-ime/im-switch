@@ -18,7 +18,13 @@ tmplang=${LC_ALL:-${LC_CTYPE:-${LANG}}}
 ## try to source ~/.xinput.d/ll_CC or /etc/X11/xinit/xinput.d/ll_CC to
 ## setup the input method for locale (CC is needed for Chinese for example)
 # unset env vars to be safe
-unset XIM XIM_PROGRAM XIM_ARGS XMODIFIERS GTK_IM_MODULE
+_XIM=$XIM
+_XIM_PROGRAM=$XIM_PROGRAM
+_XIM_ARGS=$XIM_ARGS
+_XMODIFIERS=$XMODIFIERS
+_GTK_IM_MODULE=$GTK_IM_MODULE
+_QT_IM_MODULE=$QT_IM_MODULE
+
 lang_region=$(echo $tmplang | sed -e 's/\..*//')
 for f in $HOME/.xinput.d/${lang_region} \
 	    $HOME/.xinput.d/default \
@@ -27,6 +33,13 @@ for f in $HOME/.xinput.d/${lang_region} \
     [ -r $f ] && . $f && break
 done
 unset lang_region
+
+[ "$_XIM" ] && XIM=$_XIM
+[ "$_XIM_PROGRAM" ] && XIM_PROGRAM=$_XIM_PROGRAM
+[ "$_XIM_ARGS" ] && XIM_ARGS=$_XIM_ARGS
+[ "$_XMODIFIERS" ] && XMODIFIERS=$_XMODIFIERS
+[ "$_GTK_IM_MODULE" ] && GTK_IM_MODULE=$_GTK_IM_MODULE
+[ "$_QT_IM_MODULE" ] && QT_IM_MODULE=$_QT_IM_MODULE
 
 [ -n "$GTK_IM_MODULE" ] && export GTK_IM_MODULE
 [ -n "$QT_IM_MODULE" ] && export QT_IM_MODULE
