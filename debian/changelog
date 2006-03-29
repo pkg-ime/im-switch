@@ -1,3 +1,15 @@
+im-switch (1.4) UNRELEASED; urgency=low
+
+  * Apply a fallback routine for Thai locale, contributed by
+    Michael Vogt.
+    - debian/rules, sample/th-xim:
+      - Provide Thai XIM configuration.
+    - debian/postinst, debian/prerm:
+      - Add/remove xinput-th_TH alternative as lowest priority config
+        for th_TH locale.
+
+ -- Kenshi Muto <kmuto@debian.org>  Wed, 29 Mar 2006 23:49:48 +0900
+
 im-switch (1.3) unstable; urgency=low
 
   * Fix minor typo in help message. 

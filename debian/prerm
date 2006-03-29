@@ -4,6 +4,7 @@ set -e
 case "$1" in
     remove|upgrade|deconfigure)
         update-alternatives --remove xinput-ja_JP /etc/X11/xinit/xinput.d/none
+        update-alternatives --remove xinput-th_TH /etc/X11/xinit/xinput.d/th-xim
         ;;
     failed-upgrade)
         ;;

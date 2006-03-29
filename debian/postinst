@@ -6,6 +6,9 @@ case "$1" in
 	update-alternatives \
         --install /etc/X11/xinit/xinput.d/ja_JP xinput-ja_JP \
         /etc/X11/xinit/xinput.d/none 10
+	update-alternatives \
+        --install /etc/X11/xinit/xinput.d/th_TH xinput-th_TH \
+        /etc/X11/xinit/xinput.d/th-xim 10
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
