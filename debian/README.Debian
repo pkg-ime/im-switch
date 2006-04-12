@@ -23,4 +23,6 @@ update-alternatives \
 [prerm]
 update-alternatives --remove xinput-ja_JP /etc/X11/xinit/xinput.d/uim_skk
 
+And add 'Recommends: im-switch' (or Suggests:).
+
  -- Kenshi Muto <kmuto@debian.org>, Sun, 13 Feb 2005 21:12:00 +0900

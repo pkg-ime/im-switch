@@ -1,5 +1,5 @@
-#!/bin/sh
-# Copyright (C) 2005 Kenshi Muto <kmuto@debian.org>
+#!/bin/bash
+# Copyright (C) 2005 - 2006 Kenshi Muto <kmuto@debian.org>
 #  Modified for Debian package.
 # Copyright (C) 1999 - 2004 Red Hat, Inc. All rights reserved. This
 # copyrighted material is made available to anyone wishing to use, modify,
@@ -45,7 +45,12 @@ auto() {
 
 list() {
     if [ -r "${DOTXINPUT_PATH}/${LNG}" ]; then
-	echo "You have ${LNG} setup in \"${DOTXINPUT_PATH}\"."
+	echo -n "You have ${LNG} setup in \"${DOTXINPUT_PATH}\" which indicates "
+        if [ -L "${DOTXINPUT_PATH}/${LNG}" ]; then
+          echo $(basename $(readlink "${DOTXINPUT_PATH}/${LNG}"))
+        else
+          echo "static file"
+        fi
 	echo "======================================================="
     fi
     if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then

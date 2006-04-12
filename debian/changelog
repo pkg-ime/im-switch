@@ -1,4 +1,4 @@
-im-switch (1.4) UNRELEASED; urgency=low
+im-switch (1.4) unstable; urgency=low
 
   * Apply a fallback routine for Thai locale, contributed by
     Michael Vogt.
@@ -7,6 +7,9 @@ im-switch (1.4) UNRELEASED; urgency=low
     - debian/postinst, debian/prerm:
       - Add/remove xinput-th_TH alternative as lowest priority config
         for th_TH locale.
+  * Add dependency to x11-common.
+  * Modify im-switch to show current user's choice when -l option is
+    defined.
 
  -- Kenshi Muto <kmuto@debian.org>  Wed, 29 Mar 2006 23:49:48 +0900
 
