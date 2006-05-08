@@ -1,3 +1,9 @@
+im-switch (1.5) UNRELEASED; urgency=low
+
+  * Osamu Aoki becomes co-maintainer.
+
+ -- Kenshi Muto <kmuto@debian.org>  Mon,  8 May 2006 23:58:53 +0900
+
 im-switch (1.4) unstable; urgency=low
 
   * Apply a fallback routine for Thai locale, contributed by
