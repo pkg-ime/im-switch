@@ -1,6 +1,15 @@
 im-switch (1.5) UNRELEASED; urgency=low
 
-  * Osamu Aoki becomes co-maintainer.
+  * Osamu Aoki becomes co-maintainer and made following changes.
+  * Fixed dependency check (closes: #349398)
+  * Cleaned up and enhanced code for im-switch
+    - Added -c -v options.
+    - Substituted perl script with shell script and removed 
+      external dependency to libapt-pkg-perl .
+  * Lowered evaluation priority of user specific default script.
+  * System wide default / none scripts are installed for all locales.
+  * Use /bin/sh instead of /bin/bash
+  * Updated README.Debian.
 
  -- Kenshi Muto <kmuto@debian.org>  Mon,  8 May 2006 23:58:53 +0900
 

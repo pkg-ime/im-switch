@@ -12,8 +12,10 @@
 #
 # X Input method setup script
 
-# Load up the user and system locale settings
+# $tmplang is locale <languag>e_<region> without .<encoding> and .<encoding>@EURO
 tmplang=${LC_ALL:-${LC_CTYPE:-${LANG}}}
+tmplang=${tmplang%@*}
+tmplang=${tmplang%.*}
 
 ## try to source ~/.xinput.d/ll_CC or /etc/X11/xinit/xinput.d/ll_CC to
 ## setup the input method for locale (CC is needed for Chinese for example)
@@ -25,10 +27,10 @@ _XMODIFIERS=$XMODIFIERS
 _GTK_IM_MODULE=$GTK_IM_MODULE
 _QT_IM_MODULE=$QT_IM_MODULE
 
-lang_region=$(echo $tmplang | sed -e 's/\..*//')
+lang_region="$tmplang"
 for f in $HOME/.xinput.d/${lang_region} \
-	    $HOME/.xinput.d/default \
 	    /etc/X11/xinit/xinput.d/${lang_region} \
+	    $HOME/.xinput.d/default \
 	    /etc/X11/xinit/xinput.d/default ; do
     [ -r $f ] && . $f && break
 done

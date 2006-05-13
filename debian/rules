@@ -33,10 +33,6 @@ build: build-stamp
 build-stamp: configure-stamp 
 	dh_testdir
 
-	# Add here commands to compile the package.
-	#$(MAKE)
-	#docbook-to-man debian/im-switch.sgml > im-switch.1
-
 	touch build-stamp
 
 clean:
@@ -59,8 +55,8 @@ install: build
 	install -o root -g root -m 755 im-switch $(CURDIR)/debian/im-switch/usr/bin/
 	install -o root -g root -m 644 xinput.sh $(CURDIR)/debian/im-switch/etc/X11/Xsession.d/90im-switch
 	install -o root -g root -m 644 sample/none $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d
+	install -o root -g root -m 644 sample/default $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d/default
 	install -o root -g root -m 644 sample/th-xim $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d
-	install -o root -g root -m 755 dependscheck.pl $(CURDIR)/debian/im-switch/usr/share/im-switch
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -83,7 +79,7 @@ binary-arch: build install
 #	dh_installinit
 #	dh_installcron
 #	dh_installinfo
-	dh_installman
+	dh_installman im-switch.8
 	dh_link
 	dh_strip
 	dh_compress

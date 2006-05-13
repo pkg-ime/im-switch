@@ -8,13 +8,19 @@ Standards-Version: 3.6.1
 
 Package: im-switch
 Architecture: all
-Recommends: x11-common | xfree86-common, libapt-pkg-perl
+Recommends: x11-common | xfree86-common
 Description: Input method switch framework
- im-switch provides the framework to switch default of input method
- on X Window System. Input method is usually needed by Japanese,
- Chinese and Korean to input their native language characters.
+ im-switch provides the framework to configure and to switch the input
+ method on X Window System depending on the locale. This input method is
+ the essential mechanism for Japanese, Chinese and Korean (CJK) language
+ to enter their non-ASCII native characters. 
  .
- By installing this package, input method, and conversion engine,
- you can use input method (XIM and IMmodule) soon without any more
- configuration. You can also choose your favorite input method by
- 'im-switch' command.
+ Some input methods such as SCIM support not only one of these CJK
+ languages but support almost all languages simultaneously by
+ dynamically switching keyboard modes with GUI.
+ .
+ By installing this package, the most desirable input method and its
+ backend conversion engine are automatically configured with both XIM or
+ IMmodule mechanism.
+ .
+ You can further customize your input method with 'im-switch' command.
