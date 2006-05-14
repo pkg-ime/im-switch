@@ -53,7 +53,7 @@ echo "Error: \"${0##*/}\" invoked with \"$ORGAT\" as options." >&2
 echo "Error: Try \"${0##*/} -h\" for usage." >&2
 }
 
-# echo missing dependency information fot $1=$LNG
+# echo missing dependency information for $1=$LNG
 dependency() {
     if [ -z "$1" ] ; then
         return
@@ -65,7 +65,7 @@ dependency() {
     else
         DEPENDS=""
     fi
-    vecho "From the package dependency information requirs"
+    vecho "From the package dependency information requires"
     vecho "  \"$DEPENDS\"."
     if [ -z "$DEPENDS" ]; then
         return
@@ -145,7 +145,7 @@ list() {
         else
 	  echo "The private configuration is a static file \"${DOTXINPUT_PATH}/${LNG}\" ."
         fi
-	echo "This private configuration supercedes the system wide default."
+	echo "This private configuration supersedes the system wide default."
     else
 	echo "No private \"${DOTXINPUT_PATH}/${LNG}\" is defined."
     fi
@@ -235,7 +235,7 @@ setalt() {
 	if [ -r "${DOTXINPUT_PATH}/${LNG}" ]; then
 	    PREVIOUS=$(current_user_im)
             mv ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
-            vecho "Backupped user configuration pointing to $PREVIOUS."
+            vecho "Backed up user configuration pointing to $PREVIOUS."
 	fi
         if [ -r "$DOTXINPUT_PATH/$1" ] ; then
             ln -s $DOTXINPUT_PATH/$1 ${DOTXINPUT_PATH}/$LNG
@@ -272,7 +272,7 @@ cfgalt() {
 	if [ -r "${DOTXINPUT_PATH}/${LNG}" ]; then
 	    PREVIOUS_USR=$(current_user_im)
             cp -a ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
-            vecho "Backupped user configuration pointing to $PREVIOUS."
+            vecho "Backed up user configuration pointing to $PREVIOUS."
 	fi
         vecho "    PREVIOUS_SYS=\"$PREVIOUS_SYS\""
         vecho "    PREVIOUS_USR=\"$PREVIOUS_USR\""
@@ -330,7 +330,7 @@ help() {
 echo "Input Method Switcher $VER"
 echo ""
 echo "\"${0##*/}\" configures the input method to be automatically switched based "
-echo "on the locale (ll_CC) using Debian \"update-alternativeis\" mechanism."
+echo "on the locale (ll_CC) using Debian \"update-alternatives\" mechanism."
 echo "When \"${0##*/}\" is invoked from root user, it sets system wide alternatives."
 echo ""
 echo "Usage: ${0##*/} [-v][-z ll_CC] -s inputmethodname"

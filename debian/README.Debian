@@ -5,7 +5,7 @@ im-switch for Debian
 !  is executed from root or not.                                        !
 =========================================================================
 
-* The input method under im-switch machanism:
+* The input method under im-switch mechanism:
 
 - The first existing configuration from the below list is sourced by
   the X start up code /etc/X1/Xsesion.d/90im-switch to activate the input 
@@ -33,7 +33,7 @@ im-switch for Debian
       This changes /etc/alternatives/xinput-<ll_CC> if it exists.
     For user configuration for current locale, execute from USER account:
       $ im-switch -s <input_method>
-      This set ~/.xinput.d/xinput-<current_locale> ponting to <input_method>
+      This set ~/.xinput.d/xinput-<current_locale> pointing to <input_method>
     For user configuration for <ll_CC> locale, execute from USER account:
       $ im-switch -z <ll_CC> -s <input_method>
       This set ~/.xinput.d/xinput-<ll_CC> pointing to <input_method>
@@ -126,12 +126,12 @@ And add 'Recommends: im-switch' (or Suggests:).
 
 Note on hook script:
 If installation of hook script is needed, please install hook script 
-in /usr/share/im-switch directory.  Currently, this seems to be raerely 
-used.  Since script in /etc/X11/xinit/xinput.d/ is souced everytime X 
+in /usr/share/im-switch directory.  Currently, this seems to be rarely 
+used.  Since script in /etc/X11/xinit/xinput.d/ is sourced every time X 
 is restarted with new locale, this is used as the hook script to up
 date system environment.
 
-Note on valuses:
+Note on values:
 Osamu thinks followings are good values for priority: (May 2006)
   0 none
   0 scim   (generic SCIM IM under non-CJK languages)

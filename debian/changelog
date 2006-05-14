@@ -1,4 +1,4 @@
-im-switch (1.5) UNRELEASED; urgency=low
+im-switch (1.5)  unstable; urgency=low
 
   * Osamu Aoki becomes co-maintainer and made following changes.
   * Fixed dependency check (closes: #349398)
@@ -7,11 +7,12 @@ im-switch (1.5) UNRELEASED; urgency=low
     - Substituted perl script with shell script and removed 
       external dependency to libapt-pkg-perl .
   * Lowered evaluation priority of user specific default script.
-  * System wide default / none scripts are installed for all locales.
+  * System wide default and none scripts are installed as fallback 
+    for all locales.
   * Use /bin/sh instead of /bin/bash
   * Updated README.Debian.
 
- -- Kenshi Muto <kmuto@debian.org>  Mon,  8 May 2006 23:58:53 +0900
+ -- Osamu Aoki <osamu@debian.org>  Sun, 14 May 2006 05:29:05 +0900
 
 im-switch (1.4) unstable; urgency=low
 
