@@ -146,15 +146,26 @@ list() {
 	  echo "The private configuration is a static file \"${DOTXINPUT_PATH}/${LNG}\" ."
         fi
 	echo "This private configuration supersedes the system wide default."
+    elif [ -L "${DOTXINPUT_PATH}/all_ALL" ]; then
+        if [ -L "${DOTXINPUT_PATH}/all_ALL" ]; then
+	  echo "The configuration \"${DOTXINPUT_PATH}/all_ALL\" is defined as a link pointing to"
+	  echo "$(basename $(readlink "${DOTXINPUT_PATH}/all_ALL"))"
+        else
+	  echo "The private configuration is a static file \"${DOTXINPUT_PATH}/all_ALL\" ."
+        fi
+	echo "This private configuration supersedes the system wide default."
     else
-	echo "No private \"${DOTXINPUT_PATH}/${LNG}\" is defined."
+	echo "No private \"${DOTXINPUT_PATH}/${LNG} or ${DOTXINPUT_PATH}/all_ALL\" is defined."
     fi
     echo "======================================================="
-    if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
-	echo "No system wide default \"${ALTER_XINPUT}${LNG}\" is defined."
-    else
+    if [ -r "${ALTER_XINPUT}${LNG}" ]; then
 	echo "The system wide default is pointed by \"${ALTER_XINPUT}${LNG}\" ."
 	/usr/sbin/update-alternatives --display xinput-$LNG | sed -e "s%$XINPUT_PATH/%%"
+    elif [ -r "${ALTER_XINPUT}all_ALL" ]; then
+	echo "The system wide default is pointed by \"${ALTER_XINPUT}all_ALL\" ."
+	/usr/sbin/update-alternatives --display xinput-all_ALL | sed -e "s%$XINPUT_PATH/%%"
+    else
+	echo "No system wide default \"${ALTER_XINPUT}${LNG} ot ${ALTER_XINPUT}all_ALL\" is defined."
     fi
     vecho "======================================================="
     vecho "The system wide default input methods are available for the locales:"
