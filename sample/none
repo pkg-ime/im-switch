@@ -1,14 +1,11 @@
 #
 # This configuration provides setting not to use any IM (keep as this is)
 # See im-switch(8) and /usr/share/doc/im-switch/README.Debian .
-
-#
-# Define IM for traditional X application with XIM
-#
+# 
 XIM=
 XIM_PROGRAM=
 XIM_ARGS=
-XMODIFIERS=
+XIM_PROGRAM_XTRA=
 
 #
 # Define GTK and QT IM module

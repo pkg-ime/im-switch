@@ -8,11 +8,15 @@ im-switch for Debian
 * The input method under im-switch mechanism:
 
 - The first existing configuration from the below list is sourced by
-  the X start up code /etc/X1/Xsesion.d/90im-switch to activate the input 
-  method under ll_CC locale.
+  the X start up code /etc/X1/Xsesion.d/90im-switch to activate the 
+  input method (IM) under ll_CC locale, if no other program has set IM 
+  related variables ("$XIM", "$XIM_PROGRAM", "$XIM_ARGS", "$XMODIFIERS",
+  "$GTK_IM_MODULE", "$QT_IM_MODULE") before this script.
 
     $HOME/.xinput.d/<ll_CC>         (as link to configuration file)
+    $HOME/.xinput.d/all_ALL         (as link to configuration file)
     /etc/X11/xinit/xinput.d/<ll_CC> (as link to configuration file)
+    /etc/X11/xinit/xinput.d/all_ALL (as link to configuration file)
     $HOME/.xinput.d/default         (as config file)
     /etc/X11/xinit/xinput.d/default (This always exists as config file)
 
@@ -70,7 +74,7 @@ im-switch for Debian
         XINPUT_PATH=/etc/X11/xinit/xinput.d
     or
         DOTXINPUT_PATH= ~/.xinput.d/
-    such as uim_skk, scim-anthy, etc..
+    such as uim-xim, scim, etc..
 
 -----------------------------
   Support new input method
@@ -97,10 +101,18 @@ If you find out that your input method is not supported as the
 system default, here is how you configure it.
 
     Edit the IM configuration file /etc/X11/xinit/xinput.d/default 
-    Run "im-switch -s default" under used locales on the system. 
+    Run "sudo im-switch -s default" under used locales on the system. 
+
+If you want to set SCIM as the system default for all locale, here is 
+how you configure it.
+
+    Run "sudo im-switch -z all_ALL -s scim". 
+    Restart X.
 
 Some IM such as SCIM requires further manual configuration such as
 adding locale to the system configuration of the supported locale.
+
+UIM can be made default in similar way.
 
 -----------------------------
   Support new input method
@@ -117,32 +129,29 @@ such as:
 [postinst]
 update-alternatives \
         --install /etc/X11/xinit/xinput.d/ja_JP xinput-ja_JP \
-        /etc/X11/xinit/xinput.d/uim_skk 50
+        /etc/X11/xinit/xinput.d/uim_xim 50
 
 [prerm]
-update-alternatives --remove xinput-ja_JP /etc/X11/xinit/xinput.d/uim_skk
+update-alternatives --remove xinput-ja_JP /etc/X11/xinit/xinput.d/uim_xim
 
 And add 'Recommends: im-switch' (or Suggests:).
 
-Note on hook script:
-If installation of hook script is needed, please install hook script 
-in /usr/share/im-switch directory.  Currently, this seems to be rarely 
-used.  Since script in /etc/X11/xinit/xinput.d/ is sourced every time X 
-is restarted with new locale, this is used as the hook script to up
-date system environment.
-
-Note on values:
+Note on values: (all_ALL can be used as valid for all locale)
 Osamu thinks followings are good values for priority: (May 2006)
   0 none
-  0 scim   (generic SCIM IM under non-CJK languages)
+  0 scim    (generic SCIM IM under all_ALL)
+  0 uim     (generic UIM IM under all_ALL)
+
  10 default
- 10 scim   (generic SCIM IM under CJK languages)
+
  20 th-xim (any old XIM based methods)
     (For xim based non-CJK IM configuration, please send us more data.)
- 50 uim-anthy, uim-skk, uim-prime, scim-anthy, ... 
+
+ 50 scim    (generic SCIM IM under CJK language locales: ja_JP, ...)
+ 50 uim-xim (generic UIM IM under CJK language locales: ja_JP, ...)
     (All modern language specific input method for each locale)
 
 
  -- Kenshi Muto <kmuto@debian.org>, Sun, 13 Feb 2005 21:12:00 +0900
- -- Osamu Aoki <osamu@debian.org>, Sat, 06 May 2006 22:58:11 +0900
+ -- Osamu Aoki <osamu@debian.org>, Tue, 16 May 2006 07:51:57 +0900
 

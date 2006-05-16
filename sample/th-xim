@@ -10,10 +10,9 @@
 #  XIM program command line arguments
 #  XMODIFIERS environment parameter
 # 
-XIM=
+XIM=BasicCheck
 XIM_PROGRAM=
 XIM_ARGS=
-XMODIFIERS="@im=BasicCheck"
 
 #
 # Define GTK and QT IM module

@@ -12,36 +12,27 @@
 #
 # X Input method setup script
 
-# $tmplang is locale <languag>e_<region> without .<encoding> and .<encoding>@EURO
-tmplang=${LC_ALL:-${LC_CTYPE:-${LANG}}}
-tmplang=${tmplang%@*}
-tmplang=${tmplang%.*}
 
-## try to source ~/.xinput.d/ll_CC or /etc/X11/xinit/xinput.d/ll_CC to
-## setup the input method for locale (CC is needed for Chinese for example)
-# unset env vars to be safe
-_XIM=$XIM
-_XIM_PROGRAM=$XIM_PROGRAM
-_XIM_ARGS=$XIM_ARGS
-_XMODIFIERS=$XMODIFIERS
-_GTK_IM_MODULE=$GTK_IM_MODULE
-_QT_IM_MODULE=$QT_IM_MODULE
+# Check other configuration has not configured IM
+if [ -z "$XIM" -a -z "$XIM_PROGRAM" -a -z "$XIM_ARGS" -a -z "$XMODIFIERS" \
+     -z "$GTK_IM_MODULE" -a -z "$QT_IM_MODULE" ]; then
 
-lang_region="$tmplang"
-for f in $HOME/.xinput.d/${lang_region} \
-	    /etc/X11/xinit/xinput.d/${lang_region} \
+# $LNG is locale <language>_<region> without .<encoding> and .<encoding>@EURO
+LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
+LNG=${LNG%@*}
+LNG=${LNG%.*}
+
+# Source first found configuration under $LNG locale
+for f in    $HOME/.xinput.d/${LNG} \
+	    $HOME/.xinput.da/all_ALL \
+	    /etc/X11/xinit/xinput.d/${LNG} \
+	    /etc/X11/xinit/xinput.d/all_ALL \
 	    $HOME/.xinput.d/default \
 	    /etc/X11/xinit/xinput.d/default ; do
     [ -r $f ] && . $f && break
 done
-unset lang_region
 
-[ "$_XIM" ] && XIM=$_XIM
-[ "$_XIM_PROGRAM" ] && XIM_PROGRAM=$_XIM_PROGRAM
-[ "$_XIM_ARGS" ] && XIM_ARGS=$_XIM_ARGS
-[ "$_XMODIFIERS" ] && XMODIFIERS=$_XMODIFIERS
-[ "$_GTK_IM_MODULE" ] && GTK_IM_MODULE=$_GTK_IM_MODULE
-[ "$_QT_IM_MODULE" ] && QT_IM_MODULE=$_QT_IM_MODULE
+unset LNG
 
 [ -n "$GTK_IM_MODULE" ] && export GTK_IM_MODULE
 [ -n "$QT_IM_MODULE" ] && export QT_IM_MODULE
@@ -51,4 +42,9 @@ unset lang_region
 [ -n "$XMODIFIERS" ] && export XMODIFIERS
 
 # execute XIM_PROGRAM
-[ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && "$XIM_PROGRAM" $XIM_ARGS &
+[ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && eval "$XIM_PROGRAM $XIM_ARGS &"
+
+# execute XIM_PROGRAM_XTRA
+[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_EXTRA &"
+
+fi
