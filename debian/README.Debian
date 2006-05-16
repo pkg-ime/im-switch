@@ -17,7 +17,6 @@ im-switch for Debian
     $HOME/.xinput.d/all_ALL         (as link to configuration file)
     /etc/X11/xinit/xinput.d/<ll_CC> (as link to configuration file)
     /etc/X11/xinit/xinput.d/all_ALL (as link to configuration file)
-    $HOME/.xinput.d/default         (as config file)
     /etc/X11/xinit/xinput.d/default (This always exists as config file)
 
 * im-switch commands and their results:
@@ -92,6 +91,15 @@ configuration.
 
 Some IM such as SCIM requires further manual configuration such as
 adding locale to the user configuration of the supported locale.
+
+If you find out that your input method <my-im> is not well supported 
+by the Debian package, here is how you configure it as a user to over 
+ride it.
+
+    Create the IM configuration file as $HOME/.xinput.d/<my-im>
+    Run "im-switch -s <my-im>" (This <my-im> may be the same 
+      name as the system one.) or "im-switch -c" from the user account. 
+    Restart X.
 
 -----------------------------
   Support new input method
