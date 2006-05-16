@@ -24,10 +24,9 @@ LNG=${LNG%.*}
 
 # Source first found configuration under $LNG locale
 for f in    $HOME/.xinput.d/${LNG} \
-	    $HOME/.xinput.da/all_ALL \
+	    $HOME/.xinput.d/all_ALL \
 	    /etc/X11/xinit/xinput.d/${LNG} \
 	    /etc/X11/xinit/xinput.d/all_ALL \
-	    $HOME/.xinput.d/default \
 	    /etc/X11/xinit/xinput.d/default ; do
     [ -r $f ] && . $f && break
 done

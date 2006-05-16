@@ -17,7 +17,6 @@ im-switch for Debian
     $HOME/.xinput.d/all_ALL         (as link to configuration file)
     /etc/X11/xinit/xinput.d/<ll_CC> (as link to configuration file)
     /etc/X11/xinit/xinput.d/all_ALL (as link to configuration file)
-    $HOME/.xinput.d/default         (as config file)
     /etc/X11/xinit/xinput.d/default (This always exists as config file)
 
 * im-switch commands and their results:
