@@ -92,6 +92,15 @@ configuration.
 Some IM such as SCIM requires further manual configuration such as
 adding locale to the user configuration of the supported locale.
 
+If you find out that your input method <my-im> is not well supported 
+by the Debian package, here is how you configure it as a user to over 
+ride it.
+
+    Create the IM configuration file as $HOME/.xinput.d/<my-im>
+    Run "im-switch -s <my-im>" (This <my-im> may be the same 
+      name as the system one.) or "im-switch -c" from the user account. 
+    Restart X.
+
 -----------------------------
   Support new input method
     (System admin info)
