@@ -15,7 +15,7 @@
 
 # Check other configuration has not configured IM
 if [ -z "$XIM" -a -z "$XIM_PROGRAM" -a -z "$XIM_ARGS" -a -z "$XMODIFIERS" \
-     -z "$GTK_IM_MODULE" -a -z "$QT_IM_MODULE" ]; then
+     -a -z "$GTK_IM_MODULE" -a -z "$QT_IM_MODULE" ]; then
 
 # $LNG is locale <language>_<region> without .<encoding> and .<encoding>@EURO
 LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
