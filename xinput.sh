@@ -30,7 +30,7 @@ for f in    "$HOME/.xinput.d/${LNG}" \
 	    "/etc/X11/xinit/xinput.d/${LNG}" \
 	    "/etc/X11/xinit/xinput.d/all_ALL" \
 	    "/etc/X11/xinit/xinput.d/default" ; do
-    if [ -f "$f" -a -r "$f" ] then
+    if [ -f "$f" -a -r "$f" ]; then
 	. "$f"
 	break
     fi
