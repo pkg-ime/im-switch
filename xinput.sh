@@ -46,6 +46,6 @@ unset LNG
 [ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && eval "$XIM_PROGRAM $XIM_ARGS &"
 
 # execute XIM_PROGRAM_XTRA
-[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_EXTRA &"
+[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_XTRA &"
 
 fi
