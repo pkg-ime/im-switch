@@ -25,6 +25,8 @@ LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
 LNG=${LNG%@*}
 LNG=${LNG%.*}
 
+[ -z "$LNG" ] && LNG="en_US"
+
 USERID=$(id -u)
 VER=0.3+debian1.5
 

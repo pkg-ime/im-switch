@@ -22,13 +22,15 @@ LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
 LNG=${LNG%@*}
 LNG=${LNG%.*}
 
+[ -z "$LNG" ] && LNG="en_US"
+
 # Source first found configuration under $LNG locale
-for f in    $HOME/.xinput.d/${LNG} \
-	    $HOME/.xinput.d/all_ALL \
-	    /etc/X11/xinit/xinput.d/${LNG} \
-	    /etc/X11/xinit/xinput.d/all_ALL \
-	    /etc/X11/xinit/xinput.d/default ; do
-    [ -r $f ] && . $f && break
+for f in    "$HOME/.xinput.d/${LNG}" \
+	    "$HOME/.xinput.d/all_ALL" \
+	    "/etc/X11/xinit/xinput.d/${LNG}" \
+	    "/etc/X11/xinit/xinput.d/all_ALL" \
+	    "/etc/X11/xinit/xinput.d/default" ; do
+    [ -f "$f" -a -r "$f" ] && . "$f" && break
 done
 
 unset LNG
