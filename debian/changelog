@@ -1,6 +1,8 @@
 im-switch (1.8) unstable; urgency=low
 
   * Ensured to run even if locale is null string. (closes:#367880)
+  * Fixed error in uim, scim examples.
+  * Fixed typo in /etc/X11/Xsession.d/90im-switch.
 
  -- Osamu Aoki <osamu@debian.org>  Fri, 19 May 2006 05:04:03 +0900
 
