@@ -30,7 +30,10 @@ for f in    "$HOME/.xinput.d/${LNG}" \
 	    "/etc/X11/xinit/xinput.d/${LNG}" \
 	    "/etc/X11/xinit/xinput.d/all_ALL" \
 	    "/etc/X11/xinit/xinput.d/default" ; do
-    [ -f "$f" -a -r "$f" ] && . "$f" && break
+    if [ -f "$f" -a -r "$f" ] then
+	. "$f"
+	break
+    fi
 done
 
 unset LNG
