@@ -1,3 +1,10 @@
+im-switch (1.9) unstable; urgency=low
+
+  * Make sure to exit TRUE even if all IM parameters are NULL
+    when executing /etc/X11/Xsession.d/90im-switch.
+
+ -- Osamu Aoki <osamu@debian.org>  Fri, 19 May 2006 15:41:53 +0900
+
 im-switch (1.8) unstable; urgency=low
 
   * Ensured to run even if locale is null string. (closes:#367880)

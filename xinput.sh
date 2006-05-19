@@ -12,7 +12,6 @@
 #
 # X Input method setup script
 
-
 # Check other configuration has not configured IM
 if [ -z "$XIM" -a -z "$XIM_PROGRAM" -a -z "$XIM_ARGS" -a -z "$XMODIFIERS" \
      -a -z "$GTK_IM_MODULE" -a -z "$QT_IM_MODULE" ]; then
@@ -22,7 +21,7 @@ LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
 LNG=${LNG%@*}
 LNG=${LNG%.*}
 
-[ -z "$LNG" ] && LNG="en_US"
+[ -z "$LNG" ] && LNG="en_US" || true
 
 # Source first found configuration under $LNG locale
 for f in    "$HOME/.xinput.d/${LNG}" \
@@ -38,17 +37,17 @@ done
 
 unset LNG
 
-[ -n "$GTK_IM_MODULE" ] && export GTK_IM_MODULE
-[ -n "$QT_IM_MODULE" ] && export QT_IM_MODULE
+[ -n "$GTK_IM_MODULE" ] && export GTK_IM_MODULE || true
+[ -n "$QT_IM_MODULE" ] && export QT_IM_MODULE || true
 
 # setup XMODIFIERS
-[ -z "$XMODIFIERS" -a -n "$XIM" ] && XMODIFIERS="@im=$XIM"
-[ -n "$XMODIFIERS" ] && export XMODIFIERS
+[ -z "$XMODIFIERS" -a -n "$XIM" ] && XMODIFIERS="@im=$XIM" || true
+[ -n "$XMODIFIERS" ] && export XMODIFIERS || true
 
 # execute XIM_PROGRAM
-[ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && eval "$XIM_PROGRAM $XIM_ARGS &"
+[ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && eval "$XIM_PROGRAM $XIM_ARGS &" || true
 
 # execute XIM_PROGRAM_XTRA
-[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_XTRA &"
+[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_XTRA &" || true
 
 fi
