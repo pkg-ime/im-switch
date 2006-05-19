@@ -21,4 +21,4 @@ XIM_PROGRAM=/usr/bin/scim
 XIM_ARGS="-d"
 GTK_IM_MODULE="$gtkim"
 QT_IM_MODULE="$qtim"
-DEPENDS=scim,scim-gtk2-immodule,scim-anthy|scim-canna|scim-chewing|scim-pynyin|scim-hangle|scim-prime|scim-skk|scim-tables-additional|scim-m17n|scim-uim|scim-tables-ja|scim-tables-ko|scim-tables-zh
+DEPENDS="scim,scim-gtk2-immodule,scim-anthy|scim-canna|scim-chewing|scim-pynyin|scim-hangle|scim-prime|scim-skk|scim-tables-additional|scim-m17n|scim-uim|scim-tables-ja|scim-tables-ko|scim-tables-zh"

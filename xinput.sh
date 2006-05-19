@@ -30,7 +30,10 @@ for f in    "$HOME/.xinput.d/${LNG}" \
 	    "/etc/X11/xinit/xinput.d/${LNG}" \
 	    "/etc/X11/xinit/xinput.d/all_ALL" \
 	    "/etc/X11/xinit/xinput.d/default" ; do
-    [ -f "$f" -a -r "$f" ] && . "$f" && break
+    if [ -f "$f" -a -r "$f" ] then
+	. "$f"
+	break
+    fi
 done
 
 unset LNG
@@ -46,6 +49,6 @@ unset LNG
 [ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && eval "$XIM_PROGRAM $XIM_ARGS &"
 
 # execute XIM_PROGRAM_XTRA
-[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_EXTRA &"
+[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_XTRA &"
 
 fi

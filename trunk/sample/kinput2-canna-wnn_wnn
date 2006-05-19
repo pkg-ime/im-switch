@@ -1,5 +1,0 @@
-XIM=kinput2
-XIM_PROGRAM=/usr/X11R6/bin/kinput2-canna-wnn
-XIM_ARGS="-wnn -xim"
-GTK_IM_MODULE=
-DEPENDS=freewnn-jserver
