@@ -1,3 +1,11 @@
+im-switch (1.10) unstable; urgency=low
+
+  * When setting IM as root for the locale without im-switch 
+    alternative, the quasi-locale all_ALL is automatically assumed 
+    as good fall-back.
+
+ -- Osamu Aoki <osamu@debian.org>  Sat, 20 May 2006 06:57:44 +0900
+
 im-switch (1.9) unstable; urgency=low
 
   * Make sure to exit TRUE even if all IM parameters are NULL

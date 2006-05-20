@@ -9,7 +9,7 @@ im-switch for Debian
 !			Quick Guide                                     !
 =========================================================================
 * UIM
-  - Install all useful uim packages (use "l" under aptitude find them.)
+  - Install all useful uim packages (use "l" under aptitude to find them.)
     uim, uim-anthy (Japanese), uim-gtk2.0, ...
   - run "im-switch -c" and select "uim" as user.
   - Add /usr/bin/uim-toolbar-gtk to gnome session start up list.
@@ -19,7 +19,7 @@ im-switch for Debian
   - Relogin to user account to refresh X session.
 
 * SCIM
-  - Install all useful scim packages (use "l" under aptitude find them.)
+  - Install all useful scim packages (use "l" under aptitude to find them.)
     scim, scim-anthy (Japanese), ...
   - run "im-switch -c" and select "scim" as user.
   - Relogin to user account to refresh X session.
@@ -28,11 +28,25 @@ im-switch for Debian
   - run "im-switch -a".
   - Relogin to user account to refresh X session.
 
+* Check IM setting
+  - run "im-switch -l".
+
 Please note that selection of IM started by im-switch mechanism depends 
-on the locale value.
+on the locale value.  
 
 =========================================================================
-!			How im-switch work                              !
+!			Trouble shoot                                   !
+=========================================================================
+
+If you have any problem, see the first part of ~/.xsession-errors .
+
+Somehow, relogin may cause unknown errors.  When you check problem with 
+this relogin, please check to see the reboot has the same issue.
+
+Please file your bug report with the reportbug program.
+
+=========================================================================
+!			How im-switch works                              !
 =========================================================================
 
 * The input method under im-switch mechanism:
@@ -105,9 +119,13 @@ on the locale value.
         DOTXINPUT_PATH= ~/.xinput.d/
     such as uim-xim, scim, etc..
 
-    When locale value all_ALL is fed to im-switch command through -z, 
-    it sets IM configuration for the local without configuration.  
-    Please note there is no real locale called all_ALL. 
+    When quasi-locale value all_ALL is fed to im-switch command 
+    through -z, it sets IM configuration for the local without 
+    configuration.  Please note there is no real locale called all_ALL. 
+
+=========================================================================
+!			Appendix                                        !
+=========================================================================
 
 -----------------------------
   Support new input method
@@ -139,10 +157,11 @@ ride it.
   Support new input method
     (System admin info)
 -----------------------------
-If you find out that your input method is not supported as the
-system default, here is how you configure it.
+If you find out that your input method is not supported by the
+package using im-switch, you can stillsuport it.
 
     Edit the IM configuration file /etc/X11/xinit/xinput.d/default 
+    to support your IM.
     Run "sudo im-switch -s default" under used locales on the system. 
 
 If you want to set SCIM as the system default for all locale, here is 
@@ -166,19 +185,77 @@ running equivalent commands from root account should provide
 workaround.)
 
 Each input method deb should provide alternative for the relevant locale
-such as:
+such as (example from UIM):
 
 [postinst]
-update-alternatives \
-        --install /etc/X11/xinit/xinput.d/ja_JP xinput-ja_JP \
-        /etc/X11/xinit/xinput.d/uim_xim 50
+8X------------------------------------------------------X8
+#! /bin/sh
+set -e
+ua_inst () {
+	update-alternatives \
+        --install /etc/X11/xinit/xinput.d/$1 xinput-$1 \
+        /etc/X11/xinit/xinput.d/$2 $3 ;
+}
+
+case "$1" in
+    configure)
+        # Set up default
+        ua_inst all_ALL uim  0
+        ua_inst ja_JP   uim 50
+        ua_inst ko_KR   uim 50
+        ua_inst zh_CN   uim 50
+        ua_inst zh_TW   uim 50
+        ua_inst zh_HK   uim 50
+        ua_inst zh_SG   uim 50
+    ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+8X------------------------------------------------------X8
 
 [prerm]
-update-alternatives --remove xinput-ja_JP /etc/X11/xinit/xinput.d/uim_xim
+8X------------------------------------------------------X8
+#!/bin/sh
+set -e
+ua_remove () {
+	update-alternatives \
+        --remove xinput-$1 \
+        /etc/X11/xinit/xinput.d/$2 ;
+}
+case "$1" in
+    remove|upgrade|deconfigure)
+        ua_remove all_ALL uim
+        ua_remove ja_JP   uim
+        ua_remove ko_KR   uim
+        ua_remove zh_CN   uim
+        ua_remove zh_TW   uim
+        ua_remove zh_HK   uim
+        ua_remove zh_SG   uim
+	;;
+    failed-upgrade)
+	;;
+    *)
+	echo "prerm called with unknown argument \`$1'" >&2
+	exit 1
+   ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+8X------------------------------------------------------X8
 
 And add 'Recommends: im-switch' (or Suggests:).
 
-Note on values: (all_ALL can be used as valid for all locale)
+Note on values: (all_ALL is quasi-local value for fall back)
 Osamu thinks followings are good values for priority: (May 2006)
   0 none
   0 scim    (SCIM under all_ALL)
