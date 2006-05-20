@@ -1,0 +1,80 @@
+.TH IM\-SWITCH 8 
+.\" NAME should be all caps, SECTION should be 1-8, maybe w/ subsection
+.\" other parms are allowed: see man(7), man(1)
+.SH NAME
+im\-switch \- set up input method for X Window
+.SH SYNOPSIS
+.B 
+.B im\-switch [\-v][\-z ll_CC] \-s inputmethodname
+.TP
+.B im\-switch [\-v][\-z ll_CC] \-c
+.TP
+.B im\-switch [\-v][\-z ll_CC] \-a
+.TP
+.B im\-switch [\-v][\-z ll_CC] \-l
+.TP
+.B im\-switch \-h
+
+.SH "DESCRIPTION"
+This manual page very briefly documents the
+.B im\-switch
+command.
+.PP
+The
+.B im\-switch 
+command provides the framework to configure and to switch the input 
+method on X Window System depending on the locale. This input method 
+is the essential mechanism for Japanese, Chinese and Korean (CJK) 
+languages to enter their non-ASCII native characters.
+.PP
+Some input methods such as SCIM support not only one of these CJK languages 
+but support almost all languages simultaneously by dynamically switching 
+keyboard modes with GUI.
+.PP
+The most desirable input method is provided as the configurable system 
+wide default using Debian alternatives mechanism with
+.B /etc/alternatives/xinput-ll_CC 
+link.
+.PP
+The X start up code sources
+.B /etc/X11/Xsession.d/90im-switch
+which read the configuration file and activates the input method.
+The user configuration files and links are located in 
+.B ~/.xinput.d/ .
+The system configuration files and links are located in 
+.B /etc/X11/xinit/xinput.d/ .  
+.PP
+.B im\-switch
+understands the following options:
+.TP
+.BR \-v 
+Display verbose message during execution.
+.TP
+.BR \-z " ll_CC"
+Set up the input method for X run under
+.B ll_CC
+locale (ISO 639 / ISO 3188).  When setting for all locales, use
+.B all_ALL
+as the quasi-locale value here.
+.TP
+.BR \-s " inputmethodname"
+Set up the input method to use inputmethodname.
+.TP
+.BR \-c
+Configure the input method with menu.
+.TP
+.BR \-a
+Reset the input method to the system default.
+.TP
+.BR \-l
+List the input method configuration.
+.TP
+.BR \-h
+Print a help message to the standard output and exit.
+.SH "SEE ALSO"
+.BR update\-alternatives (8)
+.BR /usr/share/doc/im\-switch/README.Debian
+.BR /etc/X11/xinit/xinput.d/default
+.SH AUTHOR
+This manual page was written by Osamu Aoki <osamu@debian.org>,
+for the Debian GNU/Linux system (but may be used by others).
