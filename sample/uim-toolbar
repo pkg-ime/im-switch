@@ -3,7 +3,7 @@ XIM_PROGRAM=/usr/bin/uim-xim
 XIM_ARGS=
 GTK_IM_MODULE=uim
 QT_IM_MODULE=uim
-# For gnome, it is better to use its own strat up code to start systray program
+# For gnome, it is better to use its own strat up code to start toolbar program
 # Below is included as not-so-good example :)
-XIM_PROGRAM_XTRA=/usr/bin/uim-toolbar-gtk-systray
+XIM_PROGRAM_XTRA=/usr/bin/uim-toolbar-gtk
 DEPENDS="uim-xim,uim-gtk2.0|uim-qt,uim-anthy|uim-canna|uim-prime|uim-skk|uim-m17nlib"

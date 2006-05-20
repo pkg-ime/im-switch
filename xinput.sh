@@ -21,7 +21,9 @@ LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
 LNG=${LNG%@*}
 LNG=${LNG%.*}
 
-[ -z "$LNG" ] && LNG="en_US" || true
+[ -z "$LNG" ] && LNG="all_ALL" || true
+
+echo "Setting IM through im-switch for locale=$LNG."
 
 # Source first found configuration under $LNG locale
 for f in    "$HOME/.xinput.d/${LNG}" \
@@ -30,6 +32,7 @@ for f in    "$HOME/.xinput.d/${LNG}" \
 	    "/etc/X11/xinit/xinput.d/all_ALL" \
 	    "/etc/X11/xinit/xinput.d/default" ; do
     if [ -f "$f" -a -r "$f" ]; then
+	echo "Start IM through $f linked to $(readlink -f $f)."
 	. "$f"
 	break
     fi

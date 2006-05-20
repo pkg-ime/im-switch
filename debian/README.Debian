@@ -5,6 +5,36 @@ im-switch for Debian
 !  is executed from root or not.                                        !
 =========================================================================
 
+=========================================================================
+!			Quick Guide                                     !
+=========================================================================
+* UIM
+  - Install all useful uim packages (use "l" under aptitude find them.)
+    uim, uim-anthy (Japanese), uim-gtk2.0, ...
+  - run "im-switch -c" and select "uim" as user.
+  - Add /usr/bin/uim-toolbar-gtk to gnome session start up list.
+    + Pick /usr/bin/uim-toolbar-gtk-systray instead, if you like 
+      status display in systray. 
+    + Pick /usr/bin/uim-toolbar-qt instead, if you like KDE. 
+  - Relogin to user account to refresh X session.
+
+* SCIM
+  - Install all useful scim packages (use "l" under aptitude find them.)
+    scim, scim-anthy (Japanese), ...
+  - run "im-switch -c" and select "scim" as user.
+  - Relogin to user account to refresh X session.
+
+* Set back to default
+  - run "im-switch -a".
+  - Relogin to user account to refresh X session.
+
+Please note that selection of IM started by im-switch mechanism depends 
+on the locale value.
+
+=========================================================================
+!			How im-switch work                              !
+=========================================================================
+
 * The input method under im-switch mechanism:
 
 - The first existing configuration from the below list is sourced by
@@ -74,6 +104,10 @@ im-switch for Debian
     or
         DOTXINPUT_PATH= ~/.xinput.d/
     such as uim-xim, scim, etc..
+
+    When locale value all_ALL is fed to im-switch command through -z, 
+    it sets IM configuration for the local without configuration.  
+    Please note there is no real locale called all_ALL. 
 
 -----------------------------
   Support new input method
@@ -149,7 +183,6 @@ Osamu thinks followings are good values for priority: (May 2006)
   0 none
   0 scim    (SCIM under all_ALL)
   0 uim     (UIM under all_ALL)
-  0 uim-systray (... with systray support.)
 
  10 default
 
@@ -158,9 +191,7 @@ Osamu thinks followings are good values for priority: (May 2006)
 
  50 scim    (SCIM under CJK language locales: ja_JP, ...)
  50 uim     (UIM with toolbar under CJK language locales: ja_JP, ...)
- 50 uim-systray (... with systray support.)
     (All modern language specific input method for each locale)
 
  -- Kenshi Muto <kmuto@debian.org>, Sun, 13 Feb 2005 21:12:00 +0900
- -- Osamu Aoki <osamu@debian.org>, Tue, 16 May 2006 07:51:57 +0900
-
+ -- Osamu Aoki <osamu@debian.org>, Fri, 19 May 2006 17:03:11 +0900

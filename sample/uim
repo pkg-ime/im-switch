@@ -3,5 +3,7 @@ XIM_PROGRAM=/usr/bin/uim-xim
 XIM_ARGS=
 GTK_IM_MODULE=uim
 QT_IM_MODULE=uim
-XIM_PROGRAM_XTRA=/usr/bin/uim-toolbar-gtk
+# Use this configuration always with im-switch
+# Start GUI indicator programs (toolbar/sysstray,..) with session manager.
+XIM_PROGRAM_XTRA=
 DEPENDS="uim-xim,uim-gtk2.0|uim-qt,uim-anthy|uim-canna|uim-prime|uim-skk|uim-m17nlib"
