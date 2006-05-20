@@ -105,9 +105,18 @@ dependency() {
 
 # echo current system wide default IM setup name
 current_system_im () {
-    /usr/sbin/update-alternatives --display xinput-$LNG | \
-    sed -ne 's/ link currently points to \(.*\)/\1/p' | \
-    sed -e "s%${XINPUT_PATH}/%%"
+    if [ -r "${ALTER_XINPUT}${LNG}" ]; then
+	/usr/sbin/update-alternatives --display xinput-$LNG | \
+	sed -ne 's/ link currently points to \(.*\)/\1/p' | \
+	sed -e "s%${XINPUT_PATH}/%%"
+    elif [ -r "${ALTER_XINPUT}all_ALL" ]; then
+	/usr/sbin/update-alternatives --display xinput-all_ALL | \
+	sed -ne 's/ link currently points to \(.*\)/\1/p' | \
+	sed -e "s%${XINPUT_PATH}/%%"
+    else
+	echo "No system wide default \"${ALTER_XINPUT}${LNG} or ${ALTER_XINPUT}all_ALL\" is defined."
+	exit 1
+    fi
 }
 
 # echo current user IM setup name
@@ -273,6 +282,7 @@ cfgalt() {
             LNG="all_ALL"
 	fi
 	PREVIOUS=$(current_system_im)
+        echo    "System wide default for ${LNG} (or all_ALL) locale is marked with [+]."
 	/usr/sbin/update-alternatives --config xinput-$LNG
         DEFAULT=$(current_system_im)
         vecho "Changed system wide default from $PREVIOUS to $DEFAULT."
@@ -315,7 +325,7 @@ cfgalt() {
                 echo "    $INDEX        $i"
             fi
         done
-        echo    "System wide default for ${LNG} locale is marked with [+]."
+        echo    "System wide default for ${LNG} (or all_ALL) locale is marked with [+]."
         echo -n "Press enter to keep the current selection[*], or type selection number: "
         read SEL
         echo
