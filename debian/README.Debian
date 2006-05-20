@@ -38,6 +38,9 @@ on the locale value.
 !			Trouble shoot                                   !
 =========================================================================
 
+Upgrade may leave 90im-switch.dpkg-* in /etc/X11/Xsession.d/. Make sure 
+to install new version and remove old one.
+
 If you have any problem, see the first part of ~/.xsession-errors .
 
 Somehow, relogin may cause unknown errors.  When you check problem with 
