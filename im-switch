@@ -226,9 +226,9 @@ setalt() {
             exit 1
         fi
 	if [ ! -r "${ALTER_XINPUT}${LNG}" ]; then
-            echo "Error: no system wide alternatives for \"${LNG}\" local exists." >&2
-	    echo "Error: No action taken." >&2
-            exit 1
+	    echo "No system wide default defined just for locale $LNG ."
+	    echo "Use \"all_ALL\" quasi-locale and set IM."
+            LNG="all_ALL"
 	fi
 	PREVIOUS=$(current_system_im)
 	/usr/sbin/update-alternatives --set xinput-$LNG $XINPUT_PATH/${1}
