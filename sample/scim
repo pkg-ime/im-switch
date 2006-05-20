@@ -1,20 +1,27 @@
-scim_bridge="/usr/lib/gtk-2.0/2.4.0/immodules/im-scim-bridge.so"
-im_scim="/usr/lib/gtk-2.0/2.4.0/immodules/im-scim.so"
-libqscim="/usr/lib/qt3/plugins/inputmethods/libqscim.so"
+#
+# Following choice scripts are disabled in line with Ming's Documentation.
+#
+##scim_bridge="/usr/lib/gtk-2.0/2.4.0/immodules/im-scim-bridge.so"
+##im_scim="/usr/lib/gtk-2.0/2.4.0/immodules/im-scim.so"
+##libqscim="/usr/lib/qt3/plugins/inputmethods/libqscim.so"
+##
+##if [ -e "$scim_bridge" ]; then
+##        gtkim="scim-bridge"
+##elif [ -e "$im_scim" ]; then
+##	gtkim="scim"
+##else
+##        gtkim="xim"
+##fi
+##
+##if [ -e "$libqscim" ]; then
+##	qtim="scim"
+##else
+##	qtim="xim"
+##fi
 
-if [ -e "$scim_bridge" ]; then
-        gtkim="scim-bridge"
-elif [ -e "$im_scim" ]; then
-	gtkim="scim"
-else
-        gtkim="xim"
-fi
-
-if [ -e "$libqscim" ]; then
-	qtim="scim"
-else
-	qtim="xim"
-fi
+# Use safe default.  You can menu select IM default anyway.
+gtkim="xim"
+qtim="xim"
 
 XIM=SCIM
 XIM_PROGRAM=/usr/bin/scim
