@@ -282,7 +282,7 @@ cfgalt() {
             LNG="all_ALL"
 	fi
 	PREVIOUS=$(current_system_im)
-        echo    "System wide default for ${LNG} (or all_ALL) locale is marked with [+]."
+        echo    "System wide default for ${LNG} locale is marked with [+]."
 	/usr/sbin/update-alternatives --config xinput-$LNG
         DEFAULT=$(current_system_im)
         vecho "Changed system wide default from $PREVIOUS to $DEFAULT."

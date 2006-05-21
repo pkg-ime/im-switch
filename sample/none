@@ -14,6 +14,9 @@ XIM_PROGRAM_XTRA=
 GTK_IM_MODULE=
 QT_IM_MODULE=
 
+# Make sure to set as -z
+XMODIFIERS=
+
 #
 # Define lists of packages neded for above IM to function
 #

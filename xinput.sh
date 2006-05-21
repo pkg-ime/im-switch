@@ -12,9 +12,13 @@
 #
 # X Input method setup script
 
-# Check other configuration has not configured IM
-if [ -z "$XIM" -a -z "$XIM_PROGRAM" -a -z "$XIM_ARGS" -a -z "$XMODIFIERS" \
-     -a -z "$GTK_IM_MODULE" -a -z "$QT_IM_MODULE" ]; then
+# Keep original values related to IM
+_XIM=$XIM
+_XIM_PROGRAM=$XIM_PROGRAM
+_XIM_ARGS=$XIM_ARGS
+_XMODIFIERS=$XMODIFIERS
+_GTK_IM_MODULE=$GTK_IM_MODULE
+_QT_IM_MODULE=$QT_IM_MODULE
 
 # $LNG is locale <language>_<region> without .<encoding> and .<encoding>@EURO
 LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
@@ -40,6 +44,15 @@ done
 
 unset LNG
 
+# Revibe IM related environment if other values were set.
+[ "$_XIM" ] && XIM=$_XIM || true
+[ "$_XIM_PROGRAM" ] && XIM_PROGRAM=$_XIM_PROGRAM || true
+[ "$_XIM_ARGS" ] && XIM_ARGS=$_XIM_ARGS || true
+[ "$_XMODIFIERS" ] && XMODIFIERS=$_XMODIFIERS ||true
+[ "$_GTK_IM_MODULE" ] && GTK_IM_MODULE=$_GTK_IM_MODULE || true
+[ "$_QT_IM_MODULE" ] && QT_IM_MODULE=$_QT_IM_MODULE || true
+
+
 [ -n "$GTK_IM_MODULE" ] && export GTK_IM_MODULE || true
 [ -n "$QT_IM_MODULE" ] && export QT_IM_MODULE || true
 
@@ -53,4 +66,3 @@ unset LNG
 # execute XIM_PROGRAM_XTRA
 [ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_XTRA &" || true
 
-fi

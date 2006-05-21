@@ -24,6 +24,9 @@ im-switch for Debian
   - run "im-switch -c" and select "scim" as user.
   - Relogin to user account to refresh X session.
 
+* Not to set MODIFIERS to make X act in old en_US way.
+  - select "none" in im-switch command.
+
 * Set back to default
   - run "im-switch -a".
   - Relogin to user account to refresh X session.

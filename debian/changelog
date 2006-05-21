@@ -1,8 +1,10 @@
-im-switch (1.11) pre-unstable; urgency=low
+im-switch (1.11) unstable; urgency=low
 
   * Better display im-switch -c in user mode.
+  * Run hook script even if some IM related environment values
+    were set per discussion on http://bugs.debian.org/349397 .
 
- -- Osamu Aoki <osamu@debian.org>  Sat, 20 May 2006 09:23:53 +0900
+ -- Osamu Aoki <osamu@debian.org>  Sun, 21 May 2006 03:30:01 +0900
 
 im-switch (1.10) unstable; urgency=low
 
