@@ -1,3 +1,10 @@
+im-switch (1.12) unstable; urgency=low
+
+  * Address gtk.immodules isues with gpg-agent by starting im-switch at
+    /etc/X11/Xsession.d/80im-switch (closes: #375974)
+
+ -- Osamu Aoki <osamu@debian.org>  Wed,  8 Nov 2006 00:25:20 +0900
+
 im-switch (1.11) unstable; urgency=low
 
   * Better display im-switch -c in user mode.
@@ -5,6 +12,7 @@ im-switch (1.11) unstable; urgency=low
     were set per discussion on http://bugs.debian.org/349397 .
 
  -- Osamu Aoki <osamu@debian.org>  Sun, 21 May 2006 03:30:01 +0900
+
 
 im-switch (1.10) unstable; urgency=low
 
@@ -91,6 +99,7 @@ im-switch (1.2) unstable; urgency=low
   * Replace bashism (xinput.sh). (closes: #316243)
 
  -- Kenshi Muto <kmuto@debian.org>  Fri, 17 Jun 2005 11:58:42 +0900
+
 
 im-switch (1.1) unstable; urgency=low
 
