@@ -5,10 +5,17 @@ im-switch for Debian
 !  is executed from root or not.                                        !
 =========================================================================
 
+Alternative documents in Japanese and English are available at:
+ http://wiki.debian.org/JapaneseEnvironmentE (English)
+ http://wiki.debian.org/JapaneseEnvironment  (Japanese)
+ http://wiki.debian.org/UTF8vimE (English)
+ http://wiki.debian.org/UTF8vim  (Japanese)
+These are focused to use im-switch and UTF-8 locales under etch.
+
 =========================================================================
 !			Quick Guide                                     !
 =========================================================================
-* UIM
+* UIM (under gnome)
   - Install all useful uim packages (use "l" under aptitude to find them.)
     uim, uim-anthy (Japanese), uim-gtk2.0, ...
   - run "im-switch -c" and select "uim" as user.
@@ -17,6 +24,9 @@ im-switch for Debian
       status display in systray. 
     + Pick /usr/bin/uim-toolbar-qt instead, if you like KDE. 
   - Relogin to user account to refresh X session.
+
+  FYI: (With the method written in UIM package, you can use toolbar under 
+        non-gnome environment)
 
 * SCIM
   - Install all useful scim packages (use "l" under aptitude to find them.)
@@ -277,4 +287,4 @@ Osamu thinks followings are good values for priority: (May 2006)
     (All modern language specific input method for each locale)
 
  -- Kenshi Muto <kmuto@debian.org>, Sun, 13 Feb 2005 21:12:00 +0900
- -- Osamu Aoki <osamu@debian.org>, Fri, 19 May 2006 17:03:11 +0900
+ -- Osamu Aoki <osamu@debian.org>, Wed, 29 Nov 2006 23:59:29 +0900
