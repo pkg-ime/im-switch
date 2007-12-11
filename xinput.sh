@@ -61,8 +61,13 @@ unset LNG
 [ -n "$XMODIFIERS" ] && export XMODIFIERS || true
 
 # execute XIM_PROGRAM
-[ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ] && eval "$XIM_PROGRAM $XIM_ARGS &" || true
-
+if [ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ]; then
+	 if [ -z "$XIM_PROGRAM_SETS_ITSELF_AS_DAEMON" ]; then
+		eval "$XIM_PROGRAM $XIM_ARGS &" || true
+	else
+		eval "$XIM_PROGRAM $XIM_ARGS" || true
+	fi
+fi
 # execute XIM_PROGRAM_XTRA
 [ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_XTRA &" || true
 

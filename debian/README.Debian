@@ -71,7 +71,8 @@ Please file your bug report with the reportbug program.
   the X start up code /etc/X1/Xsesion.d/90im-switch to activate the 
   input method (IM) under ll_CC locale, if no other program has set IM 
   related variables ("$XIM", "$XIM_PROGRAM", "$XIM_ARGS", "$XMODIFIERS",
-  "$GTK_IM_MODULE", "$QT_IM_MODULE") before this script.
+  "$GTK_IM_MODULE", "$QT_IM_MODULE", $XIM_PROGRAM_SETS_ITSELF_AS_DAEMON) 
+  before this script.
 
     $HOME/.xinput.d/<ll_CC>         (as link to configuration file)
     $HOME/.xinput.d/all_ALL         (as link to configuration file)

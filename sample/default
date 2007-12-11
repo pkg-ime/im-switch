@@ -20,7 +20,8 @@ XIM=
 XIM_PROGRAM=
 XIM_ARGS=
 XIM_PROGRAM_XTRA=
-
+# Set following variable to non-zero string if program set itself as deamon
+XIM_PROGRAM_SETS_ITSELF_AS_DAEMON=
 #
 # Define GTK and QT IM module
 #   They may or may not be using xim as the IM.
