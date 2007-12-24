@@ -276,7 +276,9 @@ Note on values: (all_ALL is quasi-local value for fall back)
 Osamu thinks followings are good values for priority: (May 2006)
   0 none
   0 scim    (SCIM under all_ALL)
+  0 scim-immodule (for all_ALL and others)
   0 uim     (UIM under all_ALL)
+  0 default-xim (Use GTK_IM_MODULE=xim for all_ALL)
 
  10 default
 
@@ -287,5 +289,24 @@ Osamu thinks followings are good values for priority: (May 2006)
  50 uim     (UIM with toolbar under CJK language locales: ja_JP, ...)
     (All modern language specific input method for each locale)
 
+Do not try to change update-alternatives value from multiple packages 
+unless it is very well cordinated between related packages.
+
  -- Kenshi Muto <kmuto@debian.org>, Sun, 13 Feb 2005 21:12:00 +0900
- -- Osamu Aoki <osamu@debian.org>, Wed, 29 Nov 2006 23:59:29 +0900
+ -- Osamu Aoki <osamu@debian.org>, Mon, 24 Dec 2007 22:49:40 +0900
+
+To some SCIM packages (in Ubunts)
+
+If you need to make package like SCIM to chose between
+ * GTK_IM_MODULE=xim
+ * GTK_IM_MODULE=SCIM
+during install time, the best approach is to let the main scim package
+to offer debconf choices.  The file: /etc/defaults/scim is good place to
+keep that results.  Then you can adopt new script for scim to use such
+value and drop scim-immodule.  After all the im-switch configuration
+files are sourced by the shell. 
+
+I understand this im-switch is too complicated for the purpose.
+
+ -- Osamu Aoki <osamu@debian.org>, Mon, 24 Dec 2007 22:49:40 +0900
+

@@ -34,6 +34,7 @@ case "$1" in
     configure)
         # Set up default
         ua_inst all_ALL default  10
+        ua_inst all_ALL default-xim  0
         ua_inst all_ALL none  0
         # Set up *-xim
         ua_inst th_TH th-xim  20

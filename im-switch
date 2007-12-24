@@ -309,19 +309,29 @@ cfgalt() {
         INDEX=0
         for i in `possible_im`; do
             INDEX=$(($INDEX+1))
-            if [ "$PREVIOUS_USR" = "$i" ]; then
-                echo -n "*"
-            else
-                echo -n " "
-            fi
-            if [ "$PREVIOUS_SYS" = "$i" ]; then
-                echo -n "+"
-            else
-                echo -n " "
-            fi
             if [ -r $DOTXINPUT_PATH/$i ]; then
+            	if [ "$PREVIOUS_USR" = "~/.xinput.d/$i" ]; then
+                	echo -n "*"
+            	else
+                	echo -n " "
+            	fi
+            	if [ "$PREVIOUS_SYS" = "~/.xinput.d/$i" ]; then
+                	echo -n "+"
+            	else
+                	echo -n " "
+            	fi
                 echo "    $INDEX        ~/.xinput.d/$i "
             else
+            	if [ "$PREVIOUS_USR" = "$i" ]; then
+                	echo -n "*"
+            	else
+                	echo -n " "
+            	fi
+            	if [ "$PREVIOUS_SYS" = "$i" ]; then
+                	echo -n "+"
+            	else
+                	echo -n " "
+            	fi
                 echo "    $INDEX        $i"
             fi
         done

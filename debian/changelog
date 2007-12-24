@@ -1,9 +1,19 @@
+im-switch (1.16) unstable; urgency=low
+
+  * Corrected the changelog in 1.15 from "45742" to "457421" and from 2
+    "loww" to "low".  (closes: Bug#457421)
+  * Updated README.Debian.
+
+ -- Osamu Aoki <osamu@debian.org>  Mon, 24 Dec 2007 23:35:17 +0900
+
 im-switch (1.15) unstable; urgency=low
 
-  *  To fix Bug #431294 for SCIM, new variable is introduced to control
-     im-switch behavior:  $XIM_PROGRAM_SETS_ITSELF_AS_DAEMON 
+  * To fix Bug #431294 for SCIM, new variable is introduced to control
+    im-switch behavior:  $XIM_PROGRAM_SETS_ITSELF_AS_DAEMON
+  * Fixed display of "*" for current selection of ~/.xinput.d/* .
+  * Added default-xim by Teemu Likonen (closes: Bug#457421)
 
- -- Osamu Aoki <osamu@debian.org>  Wed, 07 Nov 2007 22:31:23 +0900
+ -- Osamu Aoki <osamu@debian.org>  Sat, 22 Dec 2007 23:23:50 +0900
 
 im-switch (1.14) unstable; urgency=low
 
