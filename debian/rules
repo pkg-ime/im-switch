@@ -57,6 +57,7 @@ install: build
 	install -o root -g root -m 644 sample/none $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d
 	install -o root -g root -m 644 sample/default $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d/default
 	install -o root -g root -m 644 sample/th-xim $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d
+	install -o root -g root -m 644 sample/default-xim $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d
 
 # Build architecture-independent files here.
 binary-indep: build install

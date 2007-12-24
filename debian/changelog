@@ -1,10 +1,19 @@
-im-switch (1.14) unstable; urgency=low
+im-switch (1.15) unstable; urgency=low
+
+  * To fix Bug #431294 for SCIM, new variable is introduced to control
+    im-switch behavior:  $XIM_PROGRAM_SETS_ITSELF_AS_DAEMON
+  * Fixed display of "*" for current selection of ~/.xinput.d/* .
+  * Added default-xim by Teemu Likonen (closes: Bug#45742)
+
+ -- Osamu Aoki <osamu@debian.org>  Sat, 22 Dec 2007 23:23:50 +0900
+
+im-switch (1.14) unstable; urgency=loww
 
   * Add pointer to wiki page. 
 
  -- Osamu Aoki <osamu@debian.org>  Mon,  1 Jan 2007 01:15:50 +0900
 
-im-switch (1.13) unstable; urgency=low
+im-switch (1.13) unstable; urgency=loww
 
   * Remove old 901m-switch script. (closes: Bug#400877)
   * Update README.Debian for UIM.
