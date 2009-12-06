@@ -15,7 +15,7 @@ These are focused to use im-switch and UTF-8 locales under etch.
 =========================================================================
 !			Quick Guide                                     !
 =========================================================================
-* UIM (under gnome)
+* uim (under gnome)
   - Install all useful uim packages (use "l" under aptitude to find them.)
     uim, uim-anthy (Japanese), uim-gtk2.0, ...
   - run "im-switch -c" and select "uim" as user.
@@ -25,7 +25,7 @@ These are focused to use im-switch and UTF-8 locales under etch.
     + Pick /usr/bin/uim-toolbar-qt instead, if you like KDE. 
   - Relogin to user account to refresh X session.
 
-  FYI: (With the method written in UIM package, you can use toolbar under 
+  FYI: (With the method written in uim package, you can use toolbar under 
         non-gnome environment)
 
 * SCIM
@@ -190,7 +190,7 @@ how you configure it.
 Some IM such as SCIM requires further manual configuration such as
 adding locale to the system configuration of the supported locale.
 
-UIM can be made default in similar way.
+uim can be made default in similar way.
 
 -----------------------------
   Support new input method
@@ -202,7 +202,7 @@ running equivalent commands from root account should provide
 workaround.)
 
 Each input method deb should provide alternative for the relevant locale
-such as (example from UIM):
+such as (example from uim):
 
 [postinst]
 8X------------------------------------------------------X8
@@ -277,7 +277,7 @@ Osamu thinks followings are good values for priority: (May 2006)
   0 none
   0 scim    (SCIM under all_ALL)
   0 scim-immodule (for all_ALL and others)
-  0 uim     (UIM under all_ALL)
+  0 uim     (uim under all_ALL)
   0 default-xim (Use GTK_IM_MODULE=xim for all_ALL)
 
  10 default
@@ -286,7 +286,7 @@ Osamu thinks followings are good values for priority: (May 2006)
     (For xim based non-CJK IM configuration, please send us more data.)
 
  50 scim    (SCIM under CJK language locales: ja_JP, ...)
- 50 uim     (UIM with toolbar under CJK language locales: ja_JP, ...)
+ 50 uim     (uim with toolbar under CJK language locales: ja_JP, ...)
     (All modern language specific input method for each locale)
 
 Do not try to change update-alternatives value from multiple packages 

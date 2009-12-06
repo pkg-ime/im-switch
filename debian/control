@@ -1,10 +1,11 @@
 Source: im-switch
 Section: x11
 Priority: optional
-Maintainer: Kenshi Muto <kmuto@debian.org>
-Uploaders: Osamu Aoki <osamu@debian.org>
-Build-Depends-Indep: debhelper (>= 4.0.0)
-Standards-Version: 3.6.1
+Maintainer: Osamu Aoki <osamu@debian.org>
+Uploaders: Kenshi Muto <kmuto@debian.org>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.8.3
+Vcs-Git: git://git.debian.org/git/collab-maint/im-switch.git
 
 Package: im-switch
 Architecture: all

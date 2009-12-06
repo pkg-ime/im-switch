@@ -12,7 +12,8 @@ ua_inst () {
 
 if [ -f /etc/X11/Xsession.d/90im-switch ]; then
     case `md5sum /etc/X11/Xsession.d/90im-switch|sed 's/ .*$//'` in
-	# md5sum for version 1.5-1.11
+	# md5sum for previous releases
+	0555954437ad61fe51850fae0a89378d |\
         58e24e5a127a953e05a0bed82b943700 |\
 	cb724d4db7f531b50c218007a2b9d7f2 |\
 	fac350767f9316f0ceb65b7da9638f5f |\
@@ -35,9 +36,10 @@ case "$1" in
         # Set up default
         ua_inst all_ALL default  10
         ua_inst all_ALL default-xim  0
+        ua_inst lo_TH lo-gtk  10
         ua_inst all_ALL none  0
-        # Set up *-xim
         ua_inst th_TH th-xim  20
+        ua_inst th_TH th-gtk  10
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
