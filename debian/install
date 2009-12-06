@@ -1,0 +1,4 @@
+im-switch usr/bin
+80im-switch etc/X11/Xsession.d
+xinput.d/* etc/X11/xinit/xinput.d
+lintian/im-switch usr/share/lintian/overrides/ 

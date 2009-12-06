@@ -1,64 +1,21 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
-# Sample debian/rules that uses debhelper.
-# This file was originally written by Joey Hess and Craig Small.
-# As a special exception, when this file is copied by dh-make into a
-# dh-make output file, you may use that output file without restriction.
-# This special exception was added by Craig Small in version 0.37 of dh-make.
-
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
-
-configure: configure-stamp
-configure-stamp:
-	dh_testdir
-	# Add here commands to configure the package.
-
-	touch configure-stamp
 
 build: build-stamp
-
-build-stamp: configure-stamp 
-	dh_testdir
-
+build-stamp:
+	dh build
 	touch build-stamp
 
 clean:
-	dh_testdir
-	dh_testroot
-	rm -f build-stamp configure-stamp
-	dh_clean 
+	dh clean
 
-install: build
-	dh_testdir
-	dh_testroot
-	dh_clean -k 
-	dh_installdirs
+install: build install-stamp
+install-stamp:
+	dh install
+	touch install-stamp
 
-	# Add here commands to install the package into debian/im-switch.
-	install -o root -g root -m 755 im-switch $(CURDIR)/debian/im-switch/usr/bin/
-	install -o root -g root -m 644 xinput.sh $(CURDIR)/debian/im-switch/etc/X11/Xsession.d/80im-switch
-	install -o root -g root -m 755 -d $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d 
-	# Let's install all templates
-	for i in xinput.d/*; do \
-	install -o root -g root -m 644 $$i $(CURDIR)/debian/im-switch/etc/X11/xinit/xinput.d ; \
-	done
+binary-arch: install
 
-# Build architecture-independent files here.
-binary-indep: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs 
-	dh_installdocs
-	dh_installexamples
-	dh_installman im-switch.8
-	dh_link
-	dh_compress
-	dh_fixperms
-	dh_installdeb
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
+binary-indep: install
+	dh binary-indep
 
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
+binary: binary-arch binary-indep
