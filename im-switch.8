@@ -53,9 +53,11 @@ Display verbose message during execution.
 .BR \-z " ll_CC"
 Set up the input method for X run under
 .B ll_CC
-locale (ISO 639 / ISO 3188).  When setting for all locales, use
+locale (ISO 639 / ISO 3188).  When changing the fallback default for all locales, use
 .B all_ALL
-as the quasi-locale value here.
+as the quasi-locale value here.  The setup by this
+.B all_ALL
+does not overide specific setups.
 .TP
 .BR \-s " inputmethodname"
 Set up the input method to use inputmethodname.

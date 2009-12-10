@@ -1,3 +1,12 @@
+im-switch (1.19) unstable; urgency=low
+
+  * Swiched to rules.tiny.
+  * Added ${misc:Depends}.
+  * Updated im-switch(8) to address confusion over all_ALL.
+    (My best effort answer to issues raised by #513242)
+
+ -- Osamu Aoki <osamu@debian.org>  Thu, 10 Dec 2009 19:53:29 +0900
+
 im-switch (1.18) unstable; urgency=low
 
   * Reorganized files and converted debian/rules to a simple one.
