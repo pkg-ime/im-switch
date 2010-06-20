@@ -15,18 +15,22 @@ These are focused to use im-switch and UTF-8 locales under etch.
 =========================================================================
 !			Quick Guide                                     !
 =========================================================================
-* IBus (under gnome)
+
+GUI menu for "System" -> "Preferences" -> "Input Method Preferences" runs
+ "im-switch" (which is practically "im-switch -c" with pause.).
+
+* IBus (under GNOME)
   - Install all useful IBus packages (use "l" under aptitude to find them.)
     ibus, ibus-anthy (Japanese), ibus-gtk, ...
-  - run "im-switch -c" and select "ibus" as user.
+  - "System" -> "Preferences" -> "Input Method Preferences" and select "ibus"
   - "System" -> "Preferences" -> "IBus Preferences" -> "Input Method" -> 
     "Select an input method" -> "Japanese" -> "Anthy" and click "Add". 
   - Relogin to user account to refresh X session.
 
-* uim (under gnome)
+* uim (under GNOME)
   - Install all useful uim packages (use "l" under aptitude to find them.)
     uim, uim-anthy (Japanese), uim-gtk2.0, ...
-  - run "im-switch -c" and select "uim" as user.
+  - "System" -> "Preferences" -> "Input Method Preferences" and select "uim"
   - Add /usr/bin/uim-toolbar-gtk to gnome session start up list.
     + Pick /usr/bin/uim-toolbar-gtk-systray instead, if you like 
       status display in systray. 
@@ -36,21 +40,21 @@ These are focused to use im-switch and UTF-8 locales under etch.
   FYI: (With the method written in uim package, you can use toolbar under 
         non-gnome environment)
 
-* SCIM
+* SCIM (under GNOME)
   - Install all useful scim packages (use "l" under aptitude to find them.)
     scim, scim-anthy (Japanese), ...
-  - run "im-switch -c" and select "scim" as user.
+  - "System" -> "Preferences" -> "Input Method Preferences" and select "scim"
   - Relogin to user account to refresh X session.
 
 * Not to set MODIFIERS to make X act in old en_US way.
   - select "none" in im-switch command.
 
 * Set back to default
-  - run "im-switch -a".
+  - run "im-switch -a" in console.
   - Relogin to user account to refresh X session.
 
 * Check IM setting
-  - run "im-switch -l".
+  - run "im-switch -l" in console.
 
 Please note that selection of IM started by im-switch mechanism depends 
 on the locale value.  
