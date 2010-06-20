@@ -27,8 +27,16 @@ LNG=${LNG%.*}
 
 [ -z "$LNG" ] && LNG="all_ALL" || true
 
+xpause() {
+    if [ "x$DISPLAY" != "x" ]; then
+        echo "Please press Enter to close this window and restart the X session"
+        echo "to activate the selected Imput Method (see im-switch(8))."
+	read KEYIN
+    fi
+}
+
 USERID=$(id -u)
-VER=0.3+debian1.10
+VER=@@VERSION@@
 
 VERBOSE=0
 
@@ -401,6 +409,10 @@ while getopts "vfz:als:ch" OPTION; do
     esac
 done
 
-# If no option or only with -d or/and -z
-errcmd
-exit 1
+# If no option or only with -d or/and -z == -c
+# pause if X
+vlang
+cfgalt
+xpause
+exit 0
+

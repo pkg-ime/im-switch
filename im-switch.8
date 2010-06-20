@@ -14,6 +14,8 @@ im\-switch \- set up input method for X Window
 .B im\-switch [\-v][\-z ll_CC] \-l
 .TP
 .B im\-switch \-h
+.TP
+.B im\-switch
 
 .SH "DESCRIPTION"
 This manual page very briefly documents the
@@ -27,7 +29,7 @@ method on X Window System depending on the locale. This input method
 is the essential mechanism for Japanese, Chinese and Korean (CJK) 
 languages to enter their non-ASCII native characters.
 .PP
-Some input methods such as SCIM support not only one of these CJK languages 
+Some input methods such as IBus, SCIM, and uim support not only one of these CJK languages 
 but support almost all languages simultaneously by dynamically switching 
 keyboard modes with GUI.
 .PP
@@ -43,6 +45,8 @@ The user configuration files and links are located in
 .B ~/.xinput.d/ .
 The system configuration files and links are located in 
 .B /etc/X11/xinit/xinput.d/ .  
+.PP
+This structure ensures to have different imput methods to be installed side-by-side.
 .PP
 .B im\-switch
 understands the following options:
@@ -73,6 +77,12 @@ List the input method configuration.
 .TP
 .BR \-h
 Print a help message to the standard output and exit.
+.PP
+When the
+.B im\-switch 
+command is invoked without any command arguments, it functions as
+.BR \-c
+with an extra pause at the end of the execution.  This is meant to be used by the GUI menu.
 .SH "SEE ALSO"
 .BR update\-alternatives (8)
 .BR /usr/share/doc/im\-switch/README.Debian
