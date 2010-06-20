@@ -3,8 +3,8 @@ Section: x11
 Priority: optional
 Maintainer: Osamu Aoki <osamu@debian.org>
 Uploaders: Kenshi Muto <kmuto@debian.org>
-Build-Depends: debhelper (>= 7.0.0)
-Standards-Version: 3.8.3
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
 Vcs-Git: git://git.debian.org/git/collab-maint/im-switch.git
 Vcs-browser: http://git.debian.org/?p=collab-maint/im-switch.git
 
