@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Input Method Switcher
+Name[ja]=入力メソッド切換器
+Comment=Set Keyboard Input Method
+Comment[ja]=キーボード入力メソッドの設定
+Type=Application
+Exec=im-switch
+Terminal=true
+Icon=input-keyboard
+Categories=Settings
+Encoding=UTF-8
+
