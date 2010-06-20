@@ -15,6 +15,14 @@ These are focused to use im-switch and UTF-8 locales under etch.
 =========================================================================
 !			Quick Guide                                     !
 =========================================================================
+* IBus (under gnome)
+  - Install all useful IBus packages (use "l" under aptitude to find them.)
+    ibus, ibus-anthy (Japanese), ibus-gtk, ...
+  - run "im-switch -c" and select "ibus" as user.
+  - "System" -> "Preferences" -> "IBus Preferences" -> "Input Method" -> 
+    "Select an input method" -> "Japanese" -> "Anthy" and click "Add". 
+  - Relogin to user account to refresh X session.
+
 * uim (under gnome)
   - Install all useful uim packages (use "l" under aptitude to find them.)
     uim, uim-anthy (Japanese), uim-gtk2.0, ...

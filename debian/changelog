@@ -1,3 +1,9 @@
+im-switch (1.20) unstable; urgency=low
+
+  * Updated README.Debian for IBus. 
+
+ -- Osamu Aoki <osamu@debian.org>  Sun, 20 Jun 2010 09:37:43 +0900
+
 im-switch (1.19) unstable; urgency=low
 
   * Swiched to rules.tiny.
