@@ -309,11 +309,9 @@ cfgalt() {
         vecho "    PREVIOUS_SYS=\"$PREVIOUS_SYS\""
         vecho "    PREVIOUS_USR=\"$PREVIOUS_USR\""
         COUNT=`possible_im | wc -l`
-        echo
-        echo "There are $COUNT candidates which provide IM for ${DOTXINPUT_PATH}/${LNG}:"
-        echo
-        echo "  Selection    Alternative"
-        echo "  -----------------------------------------------"
+        echo "Input Method Switcher: im-switch Version=$VER"
+        echo "  Selection    Input Method Candidates for ${DOTXINPUT_PATH}/${LNG}:"
+        echo "  ------------------------------------------------------------------"
         INDEX=0
         for i in `possible_im`; do
             INDEX=$(($INDEX+1))
@@ -369,7 +367,7 @@ cfgalt() {
 }
 
 help() {
-echo "Input Method Switcher $VER"
+echo "Input Method Switcher: im-switch Version=$VER"
 echo ""
 echo "\"${0##*/}\" configures the input method to be automatically switched based "
 echo "on the locale (ll_CC) using Debian \"update-alternatives\" mechanism."
