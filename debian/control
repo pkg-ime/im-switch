@@ -11,7 +11,7 @@ Vcs-browser: http://git.debian.org/?p=collab-maint/im-switch.git
 Package: im-switch
 Architecture: all
 Recommends: x11-common | xfree86-common
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, zenity
 Description: Input method switch framework
  im-switch provides the framework to configure and to switch the input
  method on X Window System depending on the locale. This input method is

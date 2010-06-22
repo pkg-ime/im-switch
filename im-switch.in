@@ -27,14 +27,6 @@ LNG=${LNG%.*}
 
 [ -z "$LNG" ] && LNG="all_ALL" || true
 
-xpause() {
-    if [ "x$DISPLAY" != "x" ]; then
-        echo "Please press Enter to close this window and restart the X session"
-        echo "to activate the selected Imput Method (see im-switch(8))."
-	read KEYIN
-    fi
-}
-
 USERID=$(id -u)
 VER=@@VERSION@@
 
@@ -115,11 +107,11 @@ dependency() {
 current_system_im () {
     if [ -r "${ALTER_XINPUT}${LNG}" ]; then
 	/usr/sbin/update-alternatives --display xinput-$LNG | \
-	sed -ne 's/ link currently points to \(.*\)/\1/p' | \
+	sed -ne 's/^ *link currently points to \([^ ]*\)/\1/p' | \
 	sed -e "s%${XINPUT_PATH}/%%"
     elif [ -r "${ALTER_XINPUT}all_ALL" ]; then
 	/usr/sbin/update-alternatives --display xinput-all_ALL | \
-	sed -ne 's/ link currently points to \(.*\)/\1/p' | \
+	sed -ne 's/^ *link currently points to \([^ ]*\)/\1/p' | \
 	sed -e "s%${XINPUT_PATH}/%%"
     else
 	echo "No system wide default \"${ALTER_XINPUT}${LNG} or ${ALTER_XINPUT}all_ALL\" is defined."
@@ -129,8 +121,10 @@ current_system_im () {
 
 # echo current user IM setup name
 current_user_im () {
+if [ -h ${DOTXINPUT_PATH}/$LNG ]; then
     readlink ${DOTXINPUT_PATH}/$LNG | \
     sed -e "s%${XINPUT_PATH}/%%" -e "s%${DOTXINPUT_PATH}/%~/.xinput.d/%"
+fi
 }
 
 # echo IM setup candidates
@@ -280,7 +274,7 @@ setalt() {
     runhookscripts
 }
 
-# set im setup pointing to to a script in $XINPUT_PATH by menu
+# set im setup pointing to to a script in $XINPUT_PATH by terminal menu
 cfgalt() {
     if [ "$USERID" -eq 0 ]; then
         vecho "You are root user."
@@ -302,68 +296,163 @@ cfgalt() {
         fi
         PREVIOUS_SYS=$(current_system_im)
 	if [ -r "${DOTXINPUT_PATH}/${LNG}" ]; then
-	    PREVIOUS_USR=$(current_user_im)
+	    PREVIOUS=$(current_user_im)
             cp -a ${DOTXINPUT_PATH}/${LNG} ${DOTXINPUT_PATH}/${LNG}.backup
             vecho "Backed up user configuration pointing to $PREVIOUS."
 	fi
         vecho "    PREVIOUS_SYS=\"$PREVIOUS_SYS\""
-        vecho "    PREVIOUS_USR=\"$PREVIOUS_USR\""
+        vecho "    PREVIOUS=\"$PREVIOUS\""
         COUNT=`possible_im | wc -l`
-        echo "Input Method Switcher: im-switch Version=$VER"
-        echo "  Selection    Input Method Candidates for ${DOTXINPUT_PATH}/${LNG}:"
-        echo "  ------------------------------------------------------------------"
-        INDEX=0
-        for i in `possible_im`; do
-            INDEX=$(($INDEX+1))
-            if [ -r $DOTXINPUT_PATH/$i ]; then
-            	if [ "$PREVIOUS_USR" = "~/.xinput.d/$i" ]; then
-                	echo -n "*"
-            	else
-                	echo -n " "
-            	fi
-            	if [ "$PREVIOUS_SYS" = "~/.xinput.d/$i" ]; then
-                	echo -n "+"
-            	else
-                	echo -n " "
-            	fi
-                echo "    $INDEX        ~/.xinput.d/$i "
-            else
-            	if [ "$PREVIOUS_USR" = "$i" ]; then
-                	echo -n "*"
-            	else
-                	echo -n " "
-            	fi
-            	if [ "$PREVIOUS_SYS" = "$i" ]; then
-                	echo -n "+"
-            	else
-                	echo -n " "
-            	fi
-                echo "    $INDEX        $i"
-            fi
-        done
-        echo    "System wide default for ${LNG} (or all_ALL) locale is marked with [+]."
-        echo -n "Press enter to keep the current selection[*], or type selection number: "
-        read SEL
-        echo
-        if [ -z "$SEL" ]; then
-            SEL=0
+        if [ "x$DISPLAY" != "x" ]; then
+            zenity_ucfgalt 
+        else
+            console_ucfgalt
         fi
-        INDEX=0
-        for i in `possible_im`; do
-            INDEX=$(($INDEX+1))
-            if [ "$SEL" -eq "$INDEX" ]; then
-                if [ -r "$DOTXINPUT_PATH/$i" ] ; then
-                    ln -fs $DOTXINPUT_PATH/$i ${DOTXINPUT_PATH}/$LNG
-                else
-                    ln -fs $XINPUT_PATH/$i ${DOTXINPUT_PATH}/$LNG
-                fi
-            fi
-        done
     fi
     DEFAULT=$(current_user_im)
     vecho "Set user configuration pointing to $DEFAULT."
     dependency "$DEFAULT"
     runhookscripts
+}
+
+# set user im setup pointing to to a script in $XINPUT_PATH by console menu
+console_ucfgalt() {
+echo "Input Method Switcher                     im-switch Version: $VER"
+echo "  Selection    Input Method Candidates for ${DOTXINPUT_PATH}/${LNG}:"
+echo "  ------------------------------------------------------------------"
+INDEX=0
+for i in `possible_im`; do
+    INDEX=$(($INDEX+1))
+    if [ -r $DOTXINPUT_PATH/$i ]; then
+    	if [ "$PREVIOUS" = "~/.xinput.d/$i" ]; then
+            echo -n "*"
+    	else
+            echo -n " "
+    	fi
+    	if [ "$PREVIOUS_SYS" = "~/.xinput.d/$i" ]; then
+            echo -n "+"
+    	else
+            echo -n " "
+    	fi
+        echo "    $INDEX        ~/.xinput.d/$i "
+    else
+    	if [ "$PREVIOUS" = "$i" ]; then
+            echo -n "*"
+    	else
+            echo -n " "
+    	fi
+    	if [ "$PREVIOUS_SYS" = "$i" ]; then
+            echo -n "+"
+    	else
+            echo -n " "
+    	fi
+        echo "    $INDEX        $i"
+    fi
+done
+echo    "System wide default for ${LNG} (or all_ALL) locale is marked with [+]."
+echo    "Type \"REMOVE\" to remove user selection to enable system default."
+echo -n "Press enter to keep the current selection[*], or type selection number: "
+read SEL
+echo
+if [ -z "$SEL" ]; then
+    # No action because INDEX is larger than 0
+    SEL=0
+fi
+if [ "$SEL" != "REMOVE" ]; then
+    INDEX=0
+    for i in `possible_im`; do
+        INDEX=$(($INDEX+1))
+        if [ "$SEL" -eq "$INDEX" ]; then
+            if [ -r "$DOTXINPUT_PATH/$i" ] ; then
+                ln -fs $DOTXINPUT_PATH/$i ${DOTXINPUT_PATH}/$LNG
+            else
+                ln -fs $XINPUT_PATH/$i ${DOTXINPUT_PATH}/$LNG
+            fi
+        fi
+    done
+else
+    if [ -h "$DOTXINPUT_PATH/$LNG" ] ; then
+        rm ${DOTXINPUT_PATH}/$LNG
+        vecho "${DOTXINPUT_PATH}/$LNG removed"
+    fi
+fi
+echo "Please read /usr/share/doc/im-switch/README.Debian.gz ."
+echo "Please restart the X session to activate the selected Imput Method."
+}
+
+menuitem_im () {
+echo $1 | sed \
+-e "s/^~\/\.xinput\.d\//User local configuration at ~\/\.xinput\.d\/: /" \
+-e "s/default-xim$/Use xim (default-xim)/" \
+-e "s/default$/Use setting by the sysadmin. (default)/" \
+-e "s/ibus$/Use IBus (ibus)/" \
+-e "s/lo-gtk$/Use thai IM_MODULE (lo-gtk)/" \
+-e "s/none$/Do not use Input Method. (none)/" \
+-e "s/scim-bridge$/Use SCIM via scim-bridge (scim-bridge)/" \
+-e "s/scim-immodule$/Use SCIM via IM_MODULE (scim-immodule)/" \
+-e "s/scim$/Use SCIM via xim (scim)/" \
+-e "s/skim$/Use SCIM via IM_MODULE (skim)/" \
+-e "s/th-gtk$/Use thai IM_MODULE (th-gtk)/" \
+-e "s/th-xim$/Use thai xim (th-xim)/"
+}
+# set user im setup pointing to to a script in $XINPUT_PATH by zenity menu
+zenity_ucfgalt() {
+ZCMD0="zenity --title=\"Input Method Switcher (ver $VER)\" --width=600 --height=400 --text=\"Select User Input Method for ${LNG} . User choice supercedes system choice marked as default.\" --list --radiolist --hide-column=2 --column \"User\" --column \"im\" --column \"system\" --column \"Description of Input Method\""
+ZCMD=""
+for i in `possible_im`; do
+    if [ -r $DOTXINPUT_PATH/$i ]; then
+    	if [ "$PREVIOUS" = "~/.xinput.d/$i" ]; then
+            ZCMD="$ZCMD TRUE"
+    	else
+            ZCMD="$ZCMD FALSE"
+    	fi
+        ZCMD="$ZCMD ~/.xinput.d/$i"
+    	if [ "$PREVIOUS_SYS" = "~/.xinput.d/$i" ]; then
+            ZCMD="$ZCMD default"
+    	else
+            ZCMD="$ZCMD \" \""
+    	fi
+        ZCMD="$ZCMD \"$(menuitem_im ~/.xinput.d/$i)\""
+    else
+    	if [ "$PREVIOUS" = "$i" ]; then
+            ZCMD="$ZCMD TRUE"
+    	else
+            ZCMD="$ZCMD FALSE"
+    	fi
+        ZCMD="$ZCMD $i"
+    	if [ "$PREVIOUS_SYS" = "$i" ]; then
+            ZCMD="$ZCMD default"
+    	else
+            ZCMD="$ZCMD \" \""
+    	fi
+        ZCMD="$ZCMD \"$(menuitem_im $i)\""
+    fi
+done
+ZCMD="$ZCMD FALSE REMOVE \" \" \"Remove user choice to enable system choice\""
+vecho "$ZCMD0 $ZCMD"
+SEL=$(eval $ZCMD0 $ZCMD)
+if [ -z "$SEL" ]; then
+    SEL=$PREVIOUS
+fi
+ZMES="No user configuration enabled for $LNG."
+if [ -n "$SEL" ]; then
+    if [ "$SEL" != "REMOVE" ]; then
+        if [ -r "$DOTXINPUT_PATH/$SEL" ] ; then
+            ln -fs $DOTXINPUT_PATH/$SEL ${DOTXINPUT_PATH}/$LNG
+            ZMES="User configuration $(menuitem_im $SEL) enabled for $LNG."
+        else
+            ln -fs $XINPUT_PATH/$SEL ${DOTXINPUT_PATH}/$LNG
+            ZMES="User configuration $(menuitem_im $SEL) enabled for $LNG."
+        fi
+    else
+        if [ -h "$DOTXINPUT_PATH/$LNG" ] ; then
+            rm ${DOTXINPUT_PATH}/$LNG
+            vecho "${DOTXINPUT_PATH}/$LNG removed"
+            ZMES="User configuration removed for $LNG."
+        fi
+    fi
+fi
+zenity --info --text "Please read /usr/share/doc/im-switch/README.Debian.gz . \n\n$ZMES\n\nRestart the X session to activate the selected Imput Method."
 }
 
 help() {
@@ -407,10 +496,8 @@ while getopts "vfz:als:ch" OPTION; do
     esac
 done
 
-# If no option or only with -d or/and -z == -c
-# pause if X
+# If no option --> Menu use under X :-)
 vlang
 cfgalt
-xpause
 exit 0
 
