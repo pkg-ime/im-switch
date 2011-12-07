@@ -1,5 +1,20 @@
 im-switch for Debian
 
+im-switch is deprecated.  
+
+Please install im-config package for Wheezy.
+
+This package will be droped completely for Wheezy+1.
+
+This package is kept in this shape only for ease of system upgrade from
+Squeeze system with dist-upgrade.
+
+ -- Osamu Aoki <osamu@debian.org>, Wed, 07 Dec 2011 23:56:36 +0900
+
+=== OLD CONTENTS as Below ===
+
+Some contents may be out dated.
+
 =========================================================================
 !  im-switch command behaves differently depending on whether command   !
 !  is executed from root or not.                                        !

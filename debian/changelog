@@ -1,3 +1,10 @@
+im-switch (1.21) unstable; urgency=low
+
+  * Updated README.Debian for Wheezy to indicate this is deprecated and 
+    recommended to use im-config instead. Closes: #650062, 649188
+
+ -- Osamu Aoki <osamu@debian.org>  Wed, 07 Dec 2011 23:57:36 +0900
+
 im-switch (1.20) unstable; urgency=low
 
   * Updated README.Debian for IBus. 
