@@ -1,3 +1,9 @@
+im-switch (1.22) unstable; urgency=low
+
+  * Update README.Debian and move section to oldlibs. 
+
+ -- Osamu Aoki <osamu@debian.org>  Wed, 01 Feb 2012 23:21:58 +0900
+
 im-switch (1.21) unstable; urgency=low
 
   * Updated README.Debian for Wheezy to indicate this is deprecated and 

@@ -1,19 +1,32 @@
 im-switch for Debian
+=========================================================================
+!  im-switch is deprecated for Wheezy.                                  !
+!  Please migrate to im-config                                          !
+=========================================================================
 
-im-switch is deprecated.  
+If you were using im-switch without much complicated configuration, 
+simply removing im-switch and installing im-config is sufficient.
 
-Please install im-config package for Wheezy.
+If there are many users on your system, please inform them in advance to 
+run the im-config command to set a new configuration after the transition.
+
+This package is kept in this shape only for preventing system upgrade from
+Squeeze system with dist-upgrade to install im-config automatically.  You
+are given extra time to inform users including yourself.
 
 This package will be droped completely for Wheezy+1.
 
-This package is kept in this shape only for ease of system upgrade from
-Squeeze system with dist-upgrade.
+If you find any files under the following directories after transitioning to 
+the im-config, you can safely remove them.
 
- -- Osamu Aoki <osamu@debian.org>, Wed, 07 Dec 2011 23:56:36 +0900
+    $HOME/.xinput.d/*
+    /etc/X11/xinit/xinput.d/*
+
+ -- Osamu Aoki <osamu@debian.org>, Wed, 01 Feb 2012 14:18:14 +0000
 
 === OLD CONTENTS as Below ===
 
-Some contents may be out dated.
+Some contents may be out dated.  (GNOME here is GNOME2, Wheezy is GNOME3)
 
 =========================================================================
 !  im-switch command behaves differently depending on whether command   !

@@ -1,5 +1,5 @@
 Source: im-switch
-Section: x11
+Section: oldlibs
 Priority: optional
 Maintainer: Osamu Aoki <osamu@debian.org>
 Uploaders: Kenshi Muto <kmuto@debian.org>
